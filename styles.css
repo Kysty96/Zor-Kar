@@ -1,0 +1,36 @@
+/* Celkový reset stylů */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    background-color: #f0f0f0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('tvuj-znak.png'); /* Tady bude vodoznak */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 30%; /* Nastav velikost vodoznaku */
+    background-attachment: fixed;
+}
+
+.content {
+    text-align: center;
+    color: white;
+    z-index: 10; /* Zajistí, že text bude viditelný na vrchu */
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.5em;
+}
