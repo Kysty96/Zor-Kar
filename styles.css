@@ -21,15 +21,15 @@ body {
 /* Element pro vodoznak */
 .background {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 50%;  /* Umístí vodoznak na střed vertikálně */
+    left: 50%; /* Umístí vodoznak na střed horizontálně */
+    transform: translate(-50%, -50%); /* Posune vodoznak zpět, aby byl přesně uprostřed */
+    width: 50%;  /* Velikost vodoznaku (můžeš upravit dle potřeby) */
+    height: 50%; /* Velikost vodoznaku (můžeš upravit dle potřeby) */
     background-image: url('Flux_Dev_A_mystical_emblem_representing_the_ancient_civilizati_0.jpeg');
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover; /* Pokrývá celou stránku */
-    background-attachment: fixed;
+    background-size: contain; /* Vodoznak bude přizpůsoben velikosti, ale stále zachová poměr */
     z-index: 1; /* Umístí vodoznak pod text */
 }
 
