@@ -31,6 +31,7 @@ body {
     background-repeat: no-repeat;
     background-size: contain; /* Vodoznak bude přizpůsoben velikosti, ale stále zachová poměr */
     z-index: 1; /* Umístí vodoznak pod text */
+    opacity: 0.6; /* Nastaví průhlednost (0 = úplně průhledné, 1 = neprůhledné) */
 }
 
 /* Textový obsah */
