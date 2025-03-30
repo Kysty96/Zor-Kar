@@ -12,8 +12,8 @@ html, body {
     justify-content: center;
     align-items: center;
     background-color: black; /* Černé pozadí pro zbytek stránky */
+    background-image: url('Flux_Dev_A_mystical_emblem_representing_the_ancient_civilizati_0.jpeg');
 }
-
 body {
     position: relative; /* Umístí obsah a pozadí relativně */
 }
