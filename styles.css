@@ -26,7 +26,6 @@ body {
     transform: translate(-50%, -50%); /* Posune vodoznak zpět, aby byl přesně uprostřed */
     width: 100%;  /* Velikost vodoznaku (můžeš upravit dle potřeby) */
     height: 100%; /* Velikost vodoznaku (můžeš upravit dle potřeby) */
-    background-image: url('Flux_Dev_A_mystical_emblem_representing_the_ancient_civilizati_0.jpeg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain; /* Vodoznak bude přizpůsoben velikosti, ale stále zachová poměr */
