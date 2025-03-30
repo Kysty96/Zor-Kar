@@ -8,21 +8,29 @@
 body {
     font-family: Arial, sans-serif;
     height: 100vh;
-    background-color: #000000;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: black; /* Černé pozadí pro zbytek stránky */
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-image: url('Flux_Dev_A_mystical_emblem_representing_the_ancient_civilizati_0.jpeg');
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover; /* Pokrývá celou stránku */
+    background-size: cover; /* Vodoznak pokryje celou stránku */
     background-attachment: fixed;
-    overflow: hidden; /* Zabraňuje posouvání stránky */
+    z-index: 1; /* Udržuje vodoznak pod textem */
 }
 
 .content {
-    position: absolute; /* Umístí text na vrch */
+    position: relative; /* Umístí text nad vodoznak */
     text-align: center;
     color: white;
     z-index: 10; /* Zajistí, že text bude viditelný nad vodoznakem */
@@ -31,18 +39,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column; /* Umožní vertikální uspořádání textu */
+    flex-direction: column;
     padding: 20px;
     box-sizing: border-box;
 }
 
 h1 {
     font-size: 3em;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Přidá stín pro lepší čitelnost textu */
-}
+    margin-bottom: 20px
 
-p {
-    font-size: 1.
 
   
