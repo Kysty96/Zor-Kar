@@ -45,7 +45,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%; /* Zabírá celou výšku stránky */
+    height: 70%; /* Zabírá celou výšku stránky */
 }
 
 h1 {
