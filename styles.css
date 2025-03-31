@@ -11,7 +11,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    backround-colour: black
+    backround-colour: black;
     background-image: url('Flux_Dev_A_mystical_emblem_representing_the_ancient_civilizati_0.jpeg');
 }
 body {
