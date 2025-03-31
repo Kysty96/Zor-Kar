@@ -13,6 +13,7 @@ html, body {
     align-items: center;
     background-color: black;
     background-image: url('Flux_Dev_A_mystical_emblem_representing_the_ancient_civilizati_0.jpeg');
+    animation: blikani 3s infinite alternate ease-in-out;
 }
 body {
     position: relative; /* Umístí obsah a pozadí relativně */
