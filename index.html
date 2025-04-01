@@ -135,14 +135,7 @@
                 content.classList.add('stable'); // Zastaví blikání a ustálí obsah
             }, 5000); // Po 5 sekundách
 
-            // Zobrazí SoundCloud přehrávač
-            let iframe = document.getElementById('soundcloudPlayer');
-            iframe.style.display = 'block';
-            iframe.width = "100%"; // Udělá přehrávač viditelným
-            iframe.height = "166"; // Normální výška
-            iframe.src += "&auto_play=true"; // Přidá autoplay
-
-            // Vytvoří interakci pro přehrávání
+                   // Vytvoří interakci pro přehrávání
             iframe.onload = function() {
                 var player = iframe.contentWindow;
                 player.postMessage('{"method":"play"}', '*');
