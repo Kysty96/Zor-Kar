@@ -117,9 +117,6 @@
             // Spustí přehrávání hudby
             let player = document.getElementById("soundcloudPlayer");
 
-            // Ujisti se, že src obsahuje autoplay
-            player.src = player.src.replace("auto_play=false", "auto_play=true");
-
             // Vytvoříme nový iframe pro přehrávání
             player.style.display = "block";
             player.contentWindow.postMessage('{"method":"play"}', '*'); // Spustí hudbu
