@@ -108,15 +108,17 @@
             // Zobrazí obsah stránky
             document.getElementById('content').style.display = 'block';
 
-            // Spustí hudbu ze SoundCloudu
+          // Zobrazí SoundCloud přehrávač
             let iframe = document.getElementById('soundcloudPlayer');
             iframe.style.display = 'block';
-            iframe.width = "20%"; // Udělá přehrávač viditelným
+            iframe.width = "100%"; // Udělá přehrávač viditelným
             iframe.height = "166"; // Normální výška
             iframe.src += "&auto_play=true"; // Přidá autoplay
+
             // Spustí přehrávání hudby
             let player = document.getElementById("soundcloudPlayer");
-        } 
+            player.contentWindow.postMessage('{"method":"play"}', '*'); // Spustí hudbu po kliknutí
+        }
     </script>
 
 </body>
