@@ -115,13 +115,11 @@
             iframe.height = "166"; // Normální výška
             iframe.src += "&auto_play=true"; // Přidá autoplay
 
-            // Spustí přehrávání hudby
-            let player = document.getElementById("soundcloudPlayer");
-            player.contentWindow.postMessage('{"method":"play"}', '*'); // Spustí hudbu po kliknutí
+            // Spustí přehrávání hudby (zajistí interakci s iframe)
+            iframe.contentWindow.postMessage('{"method":"play"}', '*'); // Spustí hudbu po kliknutí
         }
     </script>
 
 </body>
 </html>
-
 
