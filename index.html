@@ -116,11 +116,7 @@
             iframe.src += "&auto_play=true"; // Přidá autoplay
             // Spustí přehrávání hudby
             let player = document.getElementById("soundcloudPlayer");
-
-            // Vytvoříme nový iframe pro přehrávání
-            player.style.display = "block";
-            player.contentWindow.postMessage('{"method":"play"}', '*'); // Spustí hudbu
-        });
+        } 
     </script>
 
 </body>
