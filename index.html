@@ -71,10 +71,160 @@
         .enter-button:hover {
             background-color: #000000;
         }
+   <!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planeta Zor'Kar</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Reset stylů */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        /* Skryjeme obsah stránky do vstupu */
+        .content {
+            display: none;
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            opacity: 0; /* Skryjeme obsah na začátku */
+            animation: blink 1s infinite; /* Blikající animace */
+        }
+
+        /* Vodoznak na pozadí */
+        .background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            height: 50%;
+            background-image: url('Flux_Dev_A_mystical_emblem_representing_the_ancient_civilizati_0.jpeg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* Třpytivý efekt textu */
+        .trpytivy-text {
+            font-size: 3em;
+            text-shadow: 0 0 10px #fff, 0 0 20px #ff4500, 0 0 30px #ff0000;
+        }
+
+        /* Styl tlačítka */
+        .enter-button {
+            background-color: #2F4F4F;
+            color: #9400D3;
+            font-size: 1.5em;
+            padding: 15px 30px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .enter-button:hover {
+            background-color: #000000;
+        }
+
+        /* Blikající animace pro obsah */
+        @keyframes blink {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Když animace skončí, přestaň blikání */
+        .content.stable {
+            animation: none;
+            opacity: 1;
+        }
     </style>
 </head>
 
 <body>
+
+    <!-- Tlačítko pro vstup -->
+    <button class="enter-button" onclick="enterPlanet()">Vstup na planetu Zor'Kar</button>
+
+    <!-- Obsah stránky (skrytý do kliknutí) -->
+    <div class="content" id="content">
+        <div class="background"></div>
+        <h1 class="trpytivy-text">Vítej!!!</h1>
+        <p>Příběh planety Zor’Kar 
+
+        “Kdesi v hlubokém vesmíru, za mlhovinami zapomenutých hvězd, se nachází planeta Zor’Kar.
+        Svět plný tajemné energie, kterou její obyvatelé nazývají Essentia. Tato síla dala vzniknout jedné z nejmocnějších civilizací v galaxii – rasám válečníků, učenců a mystiků, kteří žili v harmonii s energií svého světa.
+
+        Ale klid netrvá věčně… Z temných koutů kosmu přichází hrozba. 
+        Nepřátelská říše Xel’Thar se snaží pohltit Essentii a zničit rovnováhu planety. 
+        Proto byli povoláni největší hrdinové Zor’Kar – válečníci, kováři, lučišníci, vědci i šamani. Každý má své místo v této epické bitvě o přežití.
+
+        Toto je tvůj příběh. Vydej se na cestu sběru bytostí, sestav svou vlastní armádu a objev osud Zor’Kar!”</p>
+    </div>
+
+    <!-- SoundCloud přehrávač (skrytý) -->
+    <iframe id="soundcloudPlayer" width="0" height="0" style="display: none;" 
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2068610580&auto_play=false&show_artwork=false&show_comments=false&color=%23ff5500">
+    </iframe>
+
+    <script>
+        function enterPlanet() {
+            // Skryje tlačítko
+            document.querySelector('.enter-button').style.display = 'none';
+
+            // Zobrazí obsah stránky
+            const content = document.getElementById('content');
+            content.style.display = 'block';
+
+            // Po 5 sekundách animace zmizí a obsah zůstane stabilní
+            setTimeout(() => {
+                content.classList.add('stable'); // Zastaví blikání a ustálí obsah
+            }, 5000); // Po 5 sekundách
+
+            // Zobrazí SoundCloud přehrávač
+            let iframe = document.getElementById('soundcloudPlayer');
+            iframe.style.display = 'block';
+            iframe.width = "100%"; // Udělá přehrávač viditelným
+            iframe.height = "166"; // Normální výška
+            iframe.src += "&auto_play=true"; // Přidá autoplay
+
+            // Vytvoří interakci pro přehrávání (ne všechny prohlížeče to povolují automaticky)
+            iframe.onload = function() {
+                var player = iframe.contentWindow;
+                player.postMessage('{"method":"play"}', '*');
+            };
+        }
+    </script>
+
+</body>
+</html>
 
     <!-- Tlačítko pro vstup -->
     <button class="enter-button" onclick="enterPlanet()">Vstup na planetu Zor'Kar</button>
