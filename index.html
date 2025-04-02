@@ -70,10 +70,10 @@
 
 <body>
 
-    <!-- Skryté audio prvky (více kopií pro plynulé přehrávání) -->
-    <audio id="typewriter-sound-1" src="keyboard2"></audio>
-    <audio id="typewriter-sound-2" src="keyboard1"></audio>
-    <audio id="typewriter-sound-3" src="keyboard3"></audio>
+    <!-- Zvuky psaní -->
+    <audio id="typewriter-sound-1" src="keyboard1.mp3"></audio>
+    <audio id="typewriter-sound-2" src="keyboard2.mp3"></audio>
+    <audio id="typewriter-sound-3" src="keyboard3.mp3"></audio>
     
     <button class="enter-button" onclick="playSoundAndEnterPlanet()">Vstup na planetu Zor'Kar</button>
 
@@ -115,15 +115,11 @@
         </p>
     </div>
 
-        <script>
-        let soundIndex = 0;
-
+       <script>
         function playSoundAndEnterPlanet() {
             let sound1 = document.getElementById("typewriter-sound-1");
-            let sound2 = document.getElementById("typewriter-sound-2");
-            let sound3 = document.getElementById("typewriter-sound-3");
-            
-            // 🎵 Načtení zvuku pro odblokování v prohlížeči
+
+            // Zkusíme přehrát zvuk, aby se odblokoval v prohlížeči
             sound1.play().then(() => {
                 sound1.pause();
                 sound1.currentTime = 0;
@@ -140,7 +136,7 @@
             let words = document.querySelectorAll("#story-text span");
             let sounds = [
                 document.getElementById("typewriter-sound-1"),
-                document.getElementById("typewriter-sound-2")
+                document.getElementById("typewriter-sound-2"),
                 document.getElementById("typewriter-sound-3")
             ];
 
@@ -148,26 +144,18 @@
                 if (index < words.length) {
                     words[index].style.opacity = "1";
 
-                    // 🎵 Střídání dvou zvuků pro plynulé přehrávání
-                    let sound = sounds[soundIndex % 2];
+                    // 🎵 Náhodně vybereme jeden ze tří zvuků
+                    let sound = sounds[Math.floor(Math.random() * sounds.length)];
                     sound.currentTime = 0;
                     sound.play();
-                    soundIndex++;
 
                     setTimeout(() => showWords(index + 1), 200);
                 } else {
-                    setTimeout(() => {
-                        document.getElementById("story-text").style.opacity = "0";
-                    }, 2000);
-
-                    setTimeout(() => {
-                        document.getElementById("story-text").style.opacity = "1";
-                        document.getElementById("story-text").classList.add("blinking");
-
-                        setTimeout(() => {
-                            document.getElementById("story-text").classList.remove("blinking");
-                        }, 3000);
-                    }, 4000);
+                    // Po dokončení zastavíme všechny zvuky
+                    sounds.forEach(sound => {
+                        sound.pause();
+                        sound.currentTime = 0;
+                    });
                 }
             }
 
@@ -176,3 +164,4 @@
     </script>
 
 </body>
+</html>
