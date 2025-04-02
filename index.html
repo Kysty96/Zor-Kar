@@ -115,7 +115,7 @@
     </div>
 
     <script>
-        function playSoundAndEnterPlanet() {
+        document.getElementById("enter-button").addEventListener("click", function () {
             let sound1 = document.getElementById("typewriter-sound-1");
             let sound2 = document.getElementById("typewriter-sound-2");
             let sound3 = document.getElementById("typewriter-sound-3");
@@ -137,7 +137,7 @@
                 console.log("Zvuk blokován:", error);
                 enterPlanet(); // Pokračujeme, i když jsou zvuky blokovány
             });
-        }
+        });
 
         function enterPlanet() {
             document.getElementById('enter-button').style.display = 'none';
