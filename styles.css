@@ -38,7 +38,7 @@ body {
 .content {
     position: relative;
     z-index: 2; /* Text bude nad vodoznakem */
-    color: goldenrod;
+    color: white;
     text-align: center;
     padding: 20px;
     font-family: Arial, sans-serif;
