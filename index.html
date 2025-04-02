@@ -108,7 +108,7 @@
     <div class="content" id="content">
         <div class="background"></div>
         <h1 class="trpytivy-text">Vítej!!!</h1>
-       <p id="animated-text">
+        <p class="animated-text">
     <span>Kdesi</span> <span>v</span> <span>hlubokém</span> <span>vesmíru,</span>  
     <span>za</span> <span>mlhovinami</span> <span>zapomenutých</span> <span>hvězd,</span>  
     <span>se</span> <span>nachází</span> <span>planeta</span> <span>Zor’Kar.</span>  
@@ -141,6 +141,20 @@
     <span>vlastní</span> <span>armádu</span> <span>a</span> <span>objev</span>  
     <span>osud</span> <span>Zor’Kar!</span>
 </p>
+
+.animated-text span {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in forwards;
+}
+
+.animated-text span:nth-child(1) { animation-delay: 0s; }
+.animated-text span:nth-child(2) { animation-delay: 0.5s; }
+.animated-text span:nth-child(3) { animation-delay: 1s; }
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 
     <!-- SoundCloud přehrávač (skrytý) -->
     <iframe id="soundcloudPlayer" width="0" height="0" style="display: none;" 
