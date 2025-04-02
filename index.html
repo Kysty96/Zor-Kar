@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planeta Zor'Kar</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
         /* Reset stylů */
         * {
@@ -35,12 +34,6 @@
             opacity: 0;
         }
 
-        /* Třpytivý efekt textu */
-        .trpytivy-text {
-            font-size: 3em;
-            text-shadow: 0 0 10px #fff, 0 0 20px #ff4500, 0 0 30px #ff0000;
-        }
-
         /* Styl tlačítka */
         .enter-button {
             background-color: #2F4F4F;
@@ -62,16 +55,14 @@
             opacity: 0;
         }
 
-        /* Blikající animace pro obsah */
+        /* Blikající animace */
         @keyframes blink {
             0% { opacity: 0; }    
-            5% { opacity: 1; }  
-            10% { opacity: 0.2; }  
-            15% { opacity: 0.8; }  
-            20% { opacity: 0.1; }  
-            30% { opacity: 1; }  
-            40% { opacity: 0.3; }  
-            50% { opacity: 0.9; }  
+            10% { opacity: 1; }  
+            20% { opacity: 0.2; }  
+            30% { opacity: 0.8; }  
+            40% { opacity: 0.1; }  
+            50% { opacity: 1; }  
             60% { opacity: 0.4; }  
             70% { opacity: 1; }  
             80% { opacity: 0.5; }  
@@ -79,9 +70,9 @@
             100% { opacity: 1; } 
         }
 
-        /* Přidání třídy pro blikání */
+        /* Třída pro blikání */
         .blinking {
-            animation: blink 2s infinite;
+            animation: blink 1s infinite;
         }
 
     </style>
@@ -94,86 +85,66 @@
 
     <!-- Obsah stránky (skrytý do kliknutí) -->
     <div class="content" id="content">
-        <h1 class="trpytivy-text">Vítej!!!</h1>
+        <h1>Vítej!!!</h1>
         <p class="animated-text" id="story-text">
             <span>Kdesi</span> <span>v</span> <span>hlubokém</span> <span>vesmíru,</span>  
             <span>za</span> <span>mlhovinami</span> <span>zapomenutých</span> <span>hvězd,</span>  
             <span>se</span> <span>nachází</span> <span>planeta</span> <span>Zor’Kar.</span>  
             <span>Svět</span> <span>plný</span> <span>tajemné</span> <span>energie,</span>  
-            <span>kterou</span> <span>její</span> <span>obyvatelé</span> <span>nazývají</span> <span>Essentia.</span> 
-            <p class="animated-text" id="story-text">
-    <span>Tato</span> <span>síla</span> <span>dala</span> <span>vzniknout</span>  
-    <span>jedné</span> <span>z</span> <span>nejmocnějších</span> <span>civilizací</span>  
-    <span>v</span> <span>galaxii</span> – <span>rasám</span> <span>válečníků,</span>  
-    <span>učenců</span> <span>a</span> <span>mystiků,</span>  
-    <span>kteří</span> <span>žili</span> <span>v</span> <span>harmonii</span>  
-    <span>s</span> <span>energií</span> <span>svého</span> <span>světa.</span>  
+            <span>kterou</span> <span>její</span> <span>obyvatelé</span> <span>nazývají</span> <span>Essentia.</span>  
+            <span>Tato</span> <span>síla</span> <span>dala</span> <span>vzniknout</span>  
+            <span>jedné</span> <span>z</span> <span>nejmocnějších</span> <span>civilizací</span>  
+            <span>v</span> <span>galaxii</span> – <span>rasám</span> <span>válečníků,</span>  
+            <span>učenců</span> <span>a</span> <span>mystiků,</span>  
+            <span>kteří</span> <span>žili</span> <span>v</span> <span>harmonii</span>  
+            <span>s</span> <span>energií</span> <span>svého</span> <span>světa.</span>  
 
-    <span>Ale</span> <span>klid</span> <span>netrvá</span> <span>věčně…</span>  
-    <span>Z</span> <span>temných</span> <span>koutů</span> <span>kosmu</span>  
-    <span>přichází</span> <span>hrozba.</span>  
-    <span>Nepřátelská</span> <span>říše</span> <span>Xel’Thar</span>  
-    <span>se</span> <span>snaží</span> <span>pohltit</span> <span>Essentii</span>  
-    <span>a</span> <span>zničit</span> <span>rovnováhu</span> <span>planety.</span>  
-    <span>Proto</span> <span>byli</span> <span>povoláni</span>  
-    <span>největší</span> <span>hrdinové</span> <span>Zor’Kar</span> –  
-    <span>válečníci,</span> <span>kováři,</span> <span>lučišníci,</span>  
-    <span>vědci</span> <span>i</span> <span>šamani.</span>  
-    <span>Každý</span> <span>má</span> <span>své</span> <span>místo</span>  
-    <span>v</span> <span>této</span> <span>epické</span> <span>bitvě</span>  
-    <span>o</span> <span>přežití.</span>  
-
-    <span>Toto</span> <span>je</span> <span>tvůj</span> <span>příběh.</span>  
-    <span>Vydej</span> <span>se</span> <span>na</span> <span>cestu</span>  
-    <span>sběru</span> <span>bytostí,</span> <span>sestav</span> <span>svou</span>  
-    <span>vlastní</span> <span>armádu</span> <span>a</span> <span>objev</span>  
-    <span>osud</span> <span>Zor’Kar!</span>
+            <span>Ale</span> <span>klid</span> <span>netrvá</span> <span>věčně…</span>  
+            <span>Z</span> <span>temných</span> <span>koutů</span> <span>kosmu</span>  
+            <span>přichází</span> <span>hrozba.</span>  
+            <span>Nepřátelská</span> <span>říše</span> <span>Xel’Thar</span>  
+            <span>se</span> <span>snaží</span> <span>pohltit</span> <span>Essentii</span>  
+            <span>a</span> <span>zničit</span> <span>rovnováhu</span> <span>planety.</span>  
+            <span>Proto</span> <span>byli</span> <span>povoláni</span>  
+            <span>největší</span> <span>hrdinové</span> <span>Zor’Kar</span> –  
+            <span>válečníci,</span> <span>kováři,</span> <span>lučišníci,</span>  
+            <span>vědci</span> <span>i</span> <span>šamani.</span>  
+            <span>Každý</span> <span>má</span> <span>své</span> <span>místo</span>  
+            <span>v</span> <span>této</span> <span>epické</span> <span>bitvě</span>  
+            <span>o</span> <span>přežití.</span>  
         </p>
     </div>
 
     <script>
         function enterPlanet() {
-            // Skryje tlačítko
             document.querySelector('.enter-button').style.display = 'none';
-
-            // Zobrazí obsah
             const content = document.getElementById('content');
             content.style.display = 'block';
-            content.style.opacity = '1';
 
-            // Najde všechna slova v textu
             let words = document.querySelectorAll("#story-text span");
 
-            // Funkce pro zobrazování slov jedno po druhém
             function showWords(index) {
                 if (index < words.length) {
                     words[index].style.opacity = "1";
-                    setTimeout(() => showWords(index + 1), 100); // Každé slovo se zobrazí po 100ms
+                    setTimeout(() => showWords(index + 1), 100);
                 } else {
-                    // Po zobrazení všech slov celý text na 1 sekundu zmizí
                     setTimeout(() => {
                         document.getElementById("story-text").style.opacity = "0";
                     }, 1000);
 
-                    // Poté se text znovu objeví a začne blikání
                     setTimeout(() => {
                         document.getElementById("story-text").style.opacity = "1";
                         content.classList.add("blinking");
+
+                        setTimeout(() => {
+                            content.classList.remove("blinking");
+                        }, 3000);
+
                     }, 2000);
-                     // **Po 3 sekundách blikání zastavit**
-                setTimeout(() => {
-                    content.classList.remove("blinking");
-                    content.style.opacity = "1"; // Zajistí, že text zůstane viditelný
-                }, 3000);
+                }
+            }
 
-            }, 2000);
-        }
-    }
-
-    // Spuštění efektu slovo po slovu
-    showWords(0);
-}
-                     
+            showWords(0);
         }
     </script>
 
