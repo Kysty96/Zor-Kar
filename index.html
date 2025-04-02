@@ -71,7 +71,7 @@
 <body>
 <!-- Přidání skrytého audio prvku -->
     <audio id="typewriter-sound" src="https://github.com/introduction2/Zor-Kar/raw/refs/heads/main/zapsplat_technology_computer_laptop_typing_004_99983.mp3"></audio>
-    <button class="enter-button" onclick="enterPlanet()">Vstup na planetu Zor'Kar</button>
+    <button class="enter-button" onclick="playSoundAndEnterPlanet()">Vstup na planetu Zor'Kar</button>
 
     <div class="content" id="content">
         <h1>Vítej!!!</h1>
@@ -112,6 +112,18 @@
     </div>
 
     <script>
+        function playSoundAndEnterPlanet() {
+            let sound = document.getElementById("typewriter-sound");
+
+            // 🟢 Přehrát zvuk hned při kliknutí na tlačítko
+            sound.play().then(() => {
+                enterPlanet();
+            }).catch(error => {
+                console.log("Automatické přehrání zablokováno, zkusíme ho znovu při animaci.", error);
+                enterPlanet();
+            });
+        }
+
         function enterPlanet() {
             document.querySelector('.enter-button').style.display = 'none';
             const content = document.getElementById('content');
@@ -119,10 +131,16 @@
             content.style.opacity = '1';
 
             let words = document.querySelectorAll("#story-text span");
+            let sound = document.getElementById("typewriter-sound");
 
             function showWords(index) {
                 if (index < words.length) {
                     words[index].style.opacity = "1";
+                    
+                    // 🟢 Resetuj zvuk a přehraj ho znovu
+                    sound.currentTime = 0;
+                    sound.play();
+
                     setTimeout(() => showWords(index + 1), 100);
                 } else {
                     setTimeout(() => {
