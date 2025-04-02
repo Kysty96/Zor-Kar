@@ -114,14 +114,17 @@
         </p>
     </div>
 
-    <script>
-        function playSoundAndEnterPlanet() {
-            let sound = document.getElementById("typewriter-sound");
+        <script>
+        let soundIndex = 0;
 
-            // 🎵 Umožní prohlížeči přehrávat zvuk po kliknutí
-            sound.play().then(() => {
-                sound.pause();
-                sound.currentTime = 0;
+        function playSoundAndEnterPlanet() {
+            let sound1 = document.getElementById("typewriter-sound-1");
+            let sound2 = document.getElementById("typewriter-sound-2");
+
+            // 🎵 Načtení zvuku pro odblokování v prohlížeči
+            sound1.play().then(() => {
+                sound1.pause();
+                sound1.currentTime = 0;
                 enterPlanet();
             }).catch(error => console.log("Zvuk blokován:", error));
         }
@@ -133,15 +136,20 @@
             content.style.opacity = '1';
 
             let words = document.querySelectorAll("#story-text span");
-            let sound = document.getElementById("typewriter-sound");
+            let sounds = [
+                document.getElementById("typewriter-sound-1"),
+                document.getElementById("typewriter-sound-2")
+            ];
 
             function showWords(index) {
                 if (index < words.length) {
                     words[index].style.opacity = "1";
 
-                    // 🎵 Přehrát zvuk u každého slova
+                    // 🎵 Střídání dvou zvuků pro plynulé přehrávání
+                    let sound = sounds[soundIndex % 2];
                     sound.currentTime = 0;
                     sound.play();
+                    soundIndex++;
 
                     setTimeout(() => showWords(index + 1), 200);
                 } else {
