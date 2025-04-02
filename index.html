@@ -71,8 +71,9 @@
 <body>
 
     <!-- Skryté audio prvky (více kopií pro plynulé přehrávání) -->
-    <audio id="typewriter-sound-1" src="keyboard2"></audio>
-    <audio id="typewriter-sound-2" src="keyboard1"></audio>
+    <audio1 id="typewriter-sound-1" src="keyboard2"></audio>
+    <audio2 id="typewriter-sound-2" src="keyboard1"></audio>
+    <audio3 id="typewriter-sound-3" src="keyboard3"></audio>
     
     <button class="enter-button" onclick="playSoundAndEnterPlanet()">Vstup na planetu Zor'Kar</button>
 
@@ -120,7 +121,8 @@
         function playSoundAndEnterPlanet() {
             let sound1 = document.getElementById("typewriter-sound-1");
             let sound2 = document.getElementById("typewriter-sound-2");
-
+            let sound3 = document.getElementById("typewriter-sound-3");
+            
             // 🎵 Načtení zvuku pro odblokování v prohlížeči
             sound1.play().then(() => {
                 sound1.pause();
@@ -139,6 +141,7 @@
             let sounds = [
                 document.getElementById("typewriter-sound-1"),
                 document.getElementById("typewriter-sound-2")
+                document.getElementById("typewriter-sound-3")
             ];
 
             function showWords(index) {
