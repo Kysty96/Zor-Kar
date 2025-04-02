@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planeta Zor'Kar</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
         * {
             margin: 0;
@@ -75,7 +74,7 @@
     <audio id="typewriter-sound-2" src="keyboard2.mp3"></audio>
     <audio id="typewriter-sound-3" src="keyboard3.mp3"></audio>
     
-    <button class="enter-button" onclick="playSoundAndEnterPlanet()">Vstup na planetu Zor'Kar</button>
+    <button class="enter-button" id="enter-button">Vstup na planetu Zor'Kar</button>
 
     <div class="content" id="content">
         <h1>Vítej!!!</h1>
@@ -115,17 +114,30 @@
         </p>
     </div>
 
-     <script>
-        document.getElementById("enter-button").addEventListener("click", function () {
+    <script>
+        function playSoundAndEnterPlanet() {
             let sound1 = document.getElementById("typewriter-sound-1");
+            let sound2 = document.getElementById("typewriter-sound-2");
+            let sound3 = document.getElementById("typewriter-sound-3");
 
             // Nejdřív pustíme tichý zvuk k odblokování audia v prohlížeči
             sound1.play().then(() => {
                 sound1.pause();
                 sound1.currentTime = 0;
-                enterPlanet();
-            }).catch(error => console.log("Zvuk blokován:", error));
-        });
+                sound2.play().then(() => {
+                    sound2.pause();
+                    sound2.currentTime = 0;
+                    sound3.play().then(() => {
+                        sound3.pause();
+                        sound3.currentTime = 0;
+                        enterPlanet();
+                    });
+                });
+            }).catch(error => {
+                console.log("Zvuk blokován:", error);
+                enterPlanet(); // Pokračujeme, i když jsou zvuky blokovány
+            });
+        }
 
         function enterPlanet() {
             document.getElementById('enter-button').style.display = 'none';
@@ -164,5 +176,4 @@
     </script>
 
 </body>
-</html>  
-       
+</html>
