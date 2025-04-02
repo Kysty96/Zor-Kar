@@ -160,11 +160,20 @@
                         document.getElementById("story-text").style.opacity = "1";
                         content.classList.add("blinking");
                     }, 2000);
-                }
-            }
+                     // **Po 3 sekundách blikání zastavit**
+                setTimeout(() => {
+                    content.classList.remove("blinking");
+                    content.style.opacity = "1"; // Zajistí, že text zůstane viditelný
+                }, 3000);
 
-            // Spuštění efektu slovo po slovu
-            showWords(0);
+            }, 2000);
+        }
+    }
+
+    // Spuštění efektu slovo po slovu
+    showWords(0);
+}
+                     
         }
     </script>
 
