@@ -26,17 +26,16 @@
             flex-direction: column;
         }
 
-        /* Skryjeme obsah stránky do vstupu */
+        /* Skrytý obsah na začátku */
         .content {
             display: none;
             position: relative;
             width: 80%;
             max-width: 800px;
-            opacity: 0; /* Skryjeme obsah na začátku */
-            animation: blink 1s infinite; /* Blikající animace */
+            opacity: 0;
         }
 
-        /* Vodoznak na pozadí */
+        /* Pozadí s vodoznakem */
         .background {
             position: absolute;
             top: 50%;
@@ -74,28 +73,39 @@
             background-color: #000000;
         }
 
+        /* Efekt postupného zobrazování slov */
+        .animated-text span {
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         /* Blikající animace pro obsah */
         @keyframes blink {
-    0% { opacity: 0; }    
-    5% { opacity: 1; }  
-    10% { opacity: 0.2; }  
-    15% { opacity: 0.8; }  
-    20% { opacity: 0.1; }  
-    30% { opacity: 1; }  
-    40% { opacity: 0.3; }  
-    50% { opacity: 0.9; }  
-    60% { opacity: 0.4; }  
-    70% { opacity: 1; }  
-    80% { opacity: 0.5; }  
-    90% { opacity: 1; }  
-    100% { opacity: 1; } 
-}
-
-        /* Když animace skončí, přestaň blikání */
-        .content.stable {
-            animation: none;
-            opacity: 1;
+            0% { opacity: 0; }    
+            5% { opacity: 1; }  
+            10% { opacity: 0.2; }  
+            15% { opacity: 0.8; }  
+            20% { opacity: 0.1; }  
+            30% { opacity: 1; }  
+            40% { opacity: 0.3; }  
+            50% { opacity: 0.9; }  
+            60% { opacity: 0.4; }  
+            70% { opacity: 1; }  
+            80% { opacity: 0.5; }  
+            90% { opacity: 1; }  
+            100% { opacity: 1; } 
         }
+
+        /* Přidání třídy pro blikání */
+        .content.blinking {
+            animation: blink 2s infinite;
+        }
+
     </style>
 </head>
 
@@ -108,78 +118,48 @@
     <div class="content" id="content">
         <div class="background"></div>
         <h1 class="trpytivy-text">Vítej!!!</h1>
-        <p class="animated-text">
-    <span>Kdesi</span> <span>v</span> <span>hlubokém</span> <span>vesmíru,</span>  
-    <span>za</span> <span>mlhovinami</span> <span>zapomenutých</span> <span>hvězd,</span>  
-    <span>se</span> <span>nachází</span> <span>planeta</span> <span>Zor’Kar.</span>  
-    <span>Svět</span> <span>plný</span> <span>tajemné</span> <span>energie,</span>  
-    <span>kterou</span> <span>její</span> <span>obyvatelé</span> <span>nazývají</span> <span>Essentia.</span>  
-    <span>Tato</span> <span>síla</span> <span>dala</span> <span>vzniknout</span>  
-    <span>jedné</span> <span>z</span> <span>nejmocnějších</span> <span>civilizací</span>  
-    <span>v</span> <span>galaxii</span> – <span>rasám</span> <span>válečníků,</span>  
-    <span>učenců</span> <span>a</span> <span>mystiků,</span>  
-    <span>kteří</span> <span>žili</span> <span>v</span> <span>harmonii</span>  
-    <span>s</span> <span>energií</span> <span>svého</span> <span>světa.</span>  
-
-    <span>Ale</span> <span>klid</span> <span>netrvá</span> <span>věčně…</span>  
-    <span>Z</span> <span>temných</span> <span>koutů</span> <span>kosmu</span>  
-    <span>přichází</span> <span>hrozba.</span>  
-    <span>Nepřátelská</span> <span>říše</span> <span>Xel’Thar</span>  
-    <span>se</span> <span>snaží</span> <span>pohltit</span> <span>Essentii</span>  
-    <span>a</span> <span>zničit</span> <span>rovnováhu</span> <span>planety.</span>  
-    <span>Proto</span> <span>byli</span> <span>povoláni</span>  
-    <span>největší</span> <span>hrdinové</span> <span>Zor’Kar</span> –  
-    <span>válečníci,</span> <span>kováři,</span> <span>lučišníci,</span>  
-    <span>vědci</span> <span>i</span> <span>šamani.</span>  
-    <span>Každý</span> <span>má</span> <span>své</span> <span>místo</span>  
-    <span>v</span> <span>této</span> <span>epické</span> <span>bitvě</span>  
-    <span>o</span> <span>přežití.</span>  
-
-    <span>Toto</span> <span>je</span> <span>tvůj</span> <span>příběh.</span>  
-    <span>Vydej</span> <span>se</span> <span>na</span> <span>cestu</span>  
-    <span>sběru</span> <span>bytostí,</span> <span>sestav</span> <span>svou</span>  
-    <span>vlastní</span> <span>armádu</span> <span>a</span> <span>objev</span>  
-    <span>osud</span> <span>Zor’Kar!</span>
-</p>
-
-    .animated-text span {
-    opacity: 0;
-    animation: fadeIn 0.5s ease-in forwards;
-}
-
-    .animated-text span:nth-child(1) { animation-delay: 0s; }
-    .animated-text span:nth-child(2) { animation-delay: 0.5s; }
-    .animated-text span:nth-child(3) { animation-delay: 1s; }
-
-         @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-    <!-- SoundCloud přehrávač (skrytý) -->
-    <iframe id="soundcloudPlayer" width="0" height="0" style="display: none;" 
-        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2068610580&auto_play=false&show_artwork=false&show_comments=false&color=%23ff5500">
-    </iframe>
+        <p class="animated-text" id="story-text">
+            <span>Kdesi</span> <span>v</span> <span>hlubokém</span> <span>vesmíru,</span>  
+            <span>za</span> <span>mlhovinami</span> <span>zapomenutých</span> <span>hvězd,</span>  
+            <span>se</span> <span>nachází</span> <span>planeta</span> <span>Zor’Kar.</span>  
+            <span>Svět</span> <span>plný</span> <span>tajemné</span> <span>energie,</span>  
+            <span>kterou</span> <span>její</span> <span>obyvatelé</span> <span>nazývají</span> <span>Essentia.</span>  
+            <span>Tato</span> <span>síla</span> <span>dala</span> <span>vzniknout</span>  
+            <span>jedné</span> <span>z</span> <span>nejmocnějších</span> <span>civilizací</span>  
+            <span>v</span> <span>galaxii</span> – <span>rasám</span> <span>válečníků,</span>  
+            <span>učenců</span> <span>a</span> <span>mystiků,</span>  
+            <span>kteří</span> <span>žili</span> <span>v</span> <span>harmonii</span>  
+            <span>s</span> <span>energií</span> <span>svého</span> <span>světa.</span>  
+        </p>
+    </div>
 
     <script>
         function enterPlanet() {
             // Skryje tlačítko
             document.querySelector('.enter-button').style.display = 'none';
 
-            // Zobrazí obsah stránky
+            // Zobrazí obsah
             const content = document.getElementById('content');
             content.style.display = 'block';
 
-            // Po 5 sekundách animace zmizí a obsah zůstane stabilní
-            setTimeout(() => {
-                content.classList.add('stable'); // Zastaví blikání a ustálí obsah
-            }, 3000); // Po 5 sekundách
+            // Najde všechna slova v textu
+            let words = document.querySelectorAll("#story-text span");
 
-                   // Vytvoří interakci pro přehrávání
-            iframe.onload = function() {
-                var player = iframe.contentWindow;
-                player.postMessage('{"method":"play"}', '*');
-            };
+            // Každé slovo se objeví s prodlevou
+            words.forEach((word, index) => {
+                word.style.animationDelay = `${index * 0.1}s`;
+            });
+
+            // Po dokončení animace celý text na 1 sekundu zmizí
+            setTimeout(() => {
+                document.getElementById("story-text").style.opacity = "0";
+            }, words.length * 100 + 1000); // Po skončení animace + 1s pauza
+
+            // Poté se text znovu objeví a začne blikání
+            setTimeout(() => {
+                document.getElementById("story-text").style.opacity = "1";
+                content.classList.add("blinking");
+            }, words.length * 100 + 2000);
         }
     </script>
 
