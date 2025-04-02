@@ -35,22 +35,6 @@
             opacity: 0;
         }
 
-        /* Pozadí s vodoznakem */
-        .background {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 50%;
-            height: 50%;
-            background-image: url('Flux_Dev_A_mystical_emblem_representing_the_ancient_civilizati_0.jpeg');
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: contain;
-            z-index: -1;
-            opacity: 0.3;
-        }
-
         /* Třpytivý efekt textu */
         .trpytivy-text {
             font-size: 3em;
@@ -76,12 +60,6 @@
         /* Efekt postupného zobrazování slov */
         .animated-text span {
             opacity: 0;
-            animation: fadeIn 0.5s ease-in forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         /* Blikající animace pro obsah */
@@ -102,7 +80,7 @@
         }
 
         /* Přidání třídy pro blikání */
-        .content.blinking {
+        .blinking {
             animation: blink 2s infinite;
         }
 
@@ -116,7 +94,6 @@
 
     <!-- Obsah stránky (skrytý do kliknutí) -->
     <div class="content" id="content">
-        <div class="background"></div>
         <h1 class="trpytivy-text">Vítej!!!</h1>
         <p class="animated-text" id="story-text">
             <span>Kdesi</span> <span>v</span> <span>hlubokém</span> <span>vesmíru,</span>  
@@ -124,12 +101,6 @@
             <span>se</span> <span>nachází</span> <span>planeta</span> <span>Zor’Kar.</span>  
             <span>Svět</span> <span>plný</span> <span>tajemné</span> <span>energie,</span>  
             <span>kterou</span> <span>její</span> <span>obyvatelé</span> <span>nazývají</span> <span>Essentia.</span>  
-            <span>Tato</span> <span>síla</span> <span>dala</span> <span>vzniknout</span>  
-            <span>jedné</span> <span>z</span> <span>nejmocnějších</span> <span>civilizací</span>  
-            <span>v</span> <span>galaxii</span> – <span>rasám</span> <span>válečníků,</span>  
-            <span>učenců</span> <span>a</span> <span>mystiků,</span>  
-            <span>kteří</span> <span>žili</span> <span>v</span> <span>harmonii</span>  
-            <span>s</span> <span>energií</span> <span>svého</span> <span>světa.</span>  
         </p>
     </div>
 
@@ -141,25 +112,32 @@
             // Zobrazí obsah
             const content = document.getElementById('content');
             content.style.display = 'block';
+            content.style.opacity = '1';
 
             // Najde všechna slova v textu
             let words = document.querySelectorAll("#story-text span");
 
-            // Každé slovo se objeví s prodlevou
-            words.forEach((word, index) => {
-                word.style.animationDelay = `${index * 0.1}s`;
-            });
+            // Funkce pro zobrazování slov jedno po druhém
+            function showWords(index) {
+                if (index < words.length) {
+                    words[index].style.opacity = "1";
+                    setTimeout(() => showWords(index + 1), 100); // Každé slovo se zobrazí po 100ms
+                } else {
+                    // Po zobrazení všech slov celý text na 1 sekundu zmizí
+                    setTimeout(() => {
+                        document.getElementById("story-text").style.opacity = "0";
+                    }, 1000);
 
-            // Po dokončení animace celý text na 1 sekundu zmizí
-            setTimeout(() => {
-                document.getElementById("story-text").style.opacity = "0";
-            }, words.length * 100 + 1000); // Po skončení animace + 1s pauza
+                    // Poté se text znovu objeví a začne blikání
+                    setTimeout(() => {
+                        document.getElementById("story-text").style.opacity = "1";
+                        content.classList.add("blinking");
+                    }, 2000);
+                }
+            }
 
-            // Poté se text znovu objeví a začne blikání
-            setTimeout(() => {
-                document.getElementById("story-text").style.opacity = "1";
-                content.classList.add("blinking");
-            }, words.length * 100 + 2000);
+            // Spuštění efektu slovo po slovu
+            showWords(0);
         }
     </script>
 
