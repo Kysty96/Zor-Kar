@@ -114,7 +114,14 @@
 
     <script>
         function playSoundAndEnterPlanet() {
-            enterPlanet();
+            let sound = document.getElementById("typewriter-sound");
+
+            // 🎵 Umožní prohlížeči přehrávat zvuk po kliknutí
+            sound.play().then(() => {
+                sound.pause();
+                sound.currentTime = 0;
+                enterPlanet();
+            }).catch(error => console.log("Zvuk blokován:", error));
         }
 
         function enterPlanet() {
@@ -130,9 +137,9 @@
                 if (index < words.length) {
                     words[index].style.opacity = "1";
 
-                    // 🟢 Přehrát zvuk pro každé slovo
+                    // 🎵 Přehrát zvuk u každého slova
                     sound.currentTime = 0;
-                    sound.play().catch(error => console.log("Zvuk blokován:", error));
+                    sound.play();
 
                     setTimeout(() => showWords(index + 1), 200);
                 } else {
