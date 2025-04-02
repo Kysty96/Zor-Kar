@@ -113,18 +113,6 @@
 
     <script>
         function playSoundAndEnterPlanet() {
-            let sound = document.getElementById("typewriter-sound");
-
-            // 🟢 Přehrát zvuk hned při kliknutí na tlačítko
-            sound.play().then(() => {
-                enterPlanet();
-            }).catch(error => {
-                console.log("Automatické přehrání zablokováno, zkusíme ho znovu při animaci.", error);
-                enterPlanet();
-            });
-        }
-
-        function playSoundAndEnterPlanet() {
             enterPlanet();
         }
 
