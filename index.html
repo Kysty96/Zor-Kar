@@ -124,6 +124,10 @@
             });
         }
 
+        function playSoundAndEnterPlanet() {
+            enterPlanet();
+        }
+
         function enterPlanet() {
             document.querySelector('.enter-button').style.display = 'none';
             const content = document.getElementById('content');
@@ -136,12 +140,12 @@
             function showWords(index) {
                 if (index < words.length) {
                     words[index].style.opacity = "1";
-                    
-                    // 🟢 Resetuj zvuk a přehraj ho znovu
-                    sound.currentTime = 0;
-                    sound.play();
 
-                    setTimeout(() => showWords(index + 1), 100);
+                    // 🟢 Přehrát zvuk pro každé slovo
+                    sound.currentTime = 0;
+                    sound.play().catch(error => console.log("Zvuk blokován:", error));
+
+                    setTimeout(() => showWords(index + 1), 200);
                 } else {
                     setTimeout(() => {
                         document.getElementById("story-text").style.opacity = "0";
@@ -163,4 +167,3 @@
     </script>
 
 </body>
-</html>
