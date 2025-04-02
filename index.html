@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planeta Zor'Kar</title>
     <style>
-        /* Reset stylů */
         * {
             margin: 0;
             padding: 0;
@@ -25,7 +24,6 @@
             flex-direction: column;
         }
 
-        /* Skrytý obsah na začátku */
         .content {
             display: none;
             position: relative;
@@ -34,7 +32,6 @@
             opacity: 0;
         }
 
-        /* Styl tlačítka */
         .enter-button {
             background-color: #2F4F4F;
             color: #9400D3;
@@ -50,40 +47,30 @@
             background-color: #000000;
         }
 
-        /* Efekt postupného zobrazování slov */
         .animated-text span {
             opacity: 0;
+            transition: opacity 0.2s ease-in;
         }
 
-        /* Blikající animace */
         @keyframes blink {
             0% { opacity: 0; }    
-            10% { opacity: 1; }  
-            20% { opacity: 0.2; }  
-            30% { opacity: 0.8; }  
-            40% { opacity: 0.1; }  
-            50% { opacity: 1; }  
-            60% { opacity: 0.4; }  
-            70% { opacity: 1; }  
+            20% { opacity: 1; }  
+            40% { opacity: 0.2; }  
+            60% { opacity: 1; }  
             80% { opacity: 0.5; }  
-            90% { opacity: 1; }  
             100% { opacity: 1; } 
         }
 
-        /* Třída pro blikání */
         .blinking {
-            animation: blink 1s infinite;
+            animation: blink 0.5s infinite;
         }
-
     </style>
 </head>
 
 <body>
 
-    <!-- Tlačítko pro vstup -->
     <button class="enter-button" onclick="enterPlanet()">Vstup na planetu Zor'Kar</button>
 
-    <!-- Obsah stránky (skrytý do kliknutí) -->
     <div class="content" id="content">
         <h1>Vítej!!!</h1>
         <p class="animated-text" id="story-text">
@@ -92,6 +79,7 @@
             <span>se</span> <span>nachází</span> <span>planeta</span> <span>Zor’Kar.</span>  
             <span>Svět</span> <span>plný</span> <span>tajemné</span> <span>energie,</span>  
             <span>kterou</span> <span>její</span> <span>obyvatelé</span> <span>nazývají</span> <span>Essentia.</span>  
+
             <span>Tato</span> <span>síla</span> <span>dala</span> <span>vzniknout</span>  
             <span>jedné</span> <span>z</span> <span>nejmocnějších</span> <span>civilizací</span>  
             <span>v</span> <span>galaxii</span> – <span>rasám</span> <span>válečníků,</span>  
@@ -112,6 +100,12 @@
             <span>Každý</span> <span>má</span> <span>své</span> <span>místo</span>  
             <span>v</span> <span>této</span> <span>epické</span> <span>bitvě</span>  
             <span>o</span> <span>přežití.</span>  
+
+            <span>Toto</span> <span>je</span> <span>tvůj</span> <span>příběh.</span>  
+            <span>Vydej</span> <span>se</span> <span>na</span> <span>cestu</span>  
+            <span>sběru</span> <span>bytostí,</span> <span>sestav</span> <span>svou</span>  
+            <span>vlastní</span> <span>armádu</span> <span>a</span> <span>objev</span>  
+            <span>osud</span> <span>Zor’Kar!</span>
         </p>
     </div>
 
@@ -120,6 +114,7 @@
             document.querySelector('.enter-button').style.display = 'none';
             const content = document.getElementById('content');
             content.style.display = 'block';
+            content.style.opacity = '1';
 
             let words = document.querySelectorAll("#story-text span");
 
@@ -134,12 +129,11 @@
 
                     setTimeout(() => {
                         document.getElementById("story-text").style.opacity = "1";
-                        content.classList.add("blinking");
+                        document.getElementById("story-text").classList.add("blinking");
 
                         setTimeout(() => {
-                            content.classList.remove("blinking");
+                            document.getElementById("story-text").classList.remove("blinking");
                         }, 3000);
-
                     }, 2000);
                 }
             }
