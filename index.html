@@ -62,12 +62,18 @@
     <audio id="typewriter-sound-3" src="https://introduction2.github.io/Zor-Kar/zapsplat_technology_computer_laptop_typing_003_99982.mp3"></audio>
 
     <script>
+        // Když uživatel klikne na tlačítko
         document.getElementById("enter-button").addEventListener("click", function() {
             // Tlačítko zmizí
             this.style.display = "none";
             // Zobrazíme text
             const content = document.getElementById("content");
             content.style.display = "block";
+            // Reset textu (skrytí všech spanů)
+            const words = document.querySelectorAll("#story-text span");
+            words.forEach(word => {
+                word.style.opacity = "0"; // Skryjeme všechny span elementy
+            });
 
             // Seznam zvuků
             const sounds = [
@@ -76,16 +82,15 @@
                 document.getElementById("typewriter-sound-3")
             ];
 
-            // Funkce pro zobrazení textu slovo po slovu
-            let words = document.querySelectorAll("#story-text span");
-            let currentIndex = 0;
-
+            // Funkce pro přehrání zvuku
             function playSound() {
                 const sound = sounds[Math.floor(Math.random() * sounds.length)];
                 sound.currentTime = 0;
                 sound.play();
             }
 
+            // Funkce pro zobrazení textu slovo po slovu
+            let currentIndex = 0;
             function showWords() {
                 if (currentIndex < words.length) {
                     words[currentIndex].style.opacity = "1"; // Ukážeme slovo
