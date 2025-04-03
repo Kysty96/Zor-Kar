@@ -110,15 +110,22 @@
 
         function startBlinking() {
     const fluorescentSound = document.getElementById("fluorescent-light-sound");
+    
+    // Zastavíme případné předchozí pokusy o přehrání
+    fluorescentSound.pause();
     fluorescentSound.currentTime = 0;
 
-    // Spuštění zvuku s chytrým zpracováním chyby
-    fluorescentSound.play().then(() => {
-        console.log("Zvuk zářivky přehráván");
+    // Vytvoříme nový zvukový objekt
+    const newSound = new Audio(fluorescentSound.src);
+    
+    // Pokusíme se zvuk přehrát bezpečně
+    newSound.play().then(() => {
+        console.log("Zvuk zářivky se přehrává");
     }).catch(error => {
-        console.warn("Prohlížeč blokoval zvuk zářivky:", error);
+        console.warn("Zvuk zářivky byl blokován:", error);
     });
 
+    // Blikání textu
     let blinkCount = 0;
     const blinkInterval = setInterval(() => {
         content.style.opacity = (content.style.opacity === "1") ? "0" : "1";
