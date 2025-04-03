@@ -37,54 +37,49 @@
         </p>
     </div>
 
-     <script>
+      <script>
         // Když uživatel klikne na tlačítko
-        document.getElementById("enter-button").addEventListener("click", function() {
-            // Tlačítko zmizí
-            this.style.display = "none";
-
-            // Zobrazíme text
+        document.getElementById("enter-button").addEventListener("click", function () {
+            this.style.display = "none"; // Skrytí tlačítka
             const content = document.getElementById("content");
-            content.style.display = "block";
-
-            // Text k zobrazení
-            const storyText = "Příběh planety Zor’Kar “Kdesi v hlubokém vesmíru, za mlhovinami zapomenutých hvězd, se nachází planeta Zor’Kar. Svět plný tajemné energie, kterou její obyvatelé nazývají Essentia. Tato síla dala vzniknout jedné z nejmocnějších civilizací v galaxii – rasám válečníků, učenců a mystiků, kteří žili v harmonii s energií svého světa. Ale klid netrvá věčně… Z temných koutů kosmu přichází hrozba. Nepřátelská říše Xel’Thar se snaží pohltit Essentii a zničit rovnováhu planety. Proto byli povoláni největší hrdinové Zor’Kar – válečníci, kováři, lučišníci, vědci i šamani. Každý má své místo v této epické bitvě o přežití. Toto je tvůj příběh. Vydej se na cestu sběru bytostí, sestav svou vlastní armádu a objev osud Zor’Kar!”";
-
-            // Rozdělení textu na jednotlivá slova
-            const words = storyText.split(" ");
-            const storyParagraph = document.getElementById("story-text");
-
-            let currentWord = 0;
-
-            // Funkce pro zobrazení slov jedno po druhém
-            function showWords() {
-                if (currentWord < words.length) {
-                    const wordSpan = document.createElement("span");
-                    wordSpan.textContent = words[currentWord] + " ";
-                    storyParagraph.appendChild(wordSpan);
-
-                    wordSpan.style.opacity = "0";
-                    setTimeout(() => {
-                        wordSpan.style.transition = "opacity 0.3s";
-                        wordSpan.style.opacity = "1";  // Slovo se objeví
-                    }, 100 * currentWord);
-
-                    currentWord++;
-
-                    setTimeout(showWords, 150);
-                } else {
-                    // Po zobrazení všech slov, text zmizí a pak se opět objeví
-                    setTimeout(() => {
-                        storyParagraph.style.opacity = "0";  // Text zmizí
-                        setTimeout(() => {
-                            storyParagraph.style.opacity = "1";  // Text se znovu objeví
-                        }, 2000);  // Po 2 sekundách
-                    }, 1000);  // Po zobrazení všech slov
-                }
-            }
-
-            showWords();
+            content.style.display = "block"; // Zobrazení textu
+            resetText(); // Resetujeme text, aby začal od začátku
+            showWords(0); // Začneme od začátku
         });
+
+        function resetText() {
+            // Skrytí všech již zobrazených slov
+            let words = document.querySelectorAll("#story-text span");
+            words.forEach(word => {
+                word.style.opacity = "0";
+            });
+            document.getElementById("content").style.opacity = "1"; // Zajištění, že celý obsah bude opět viditelný
+        }
+
+        function showWords(index) {
+            let words = document.querySelectorAll("#story-text span");
+
+            if (index < words.length) {
+                words[index].style.opacity = "1"; // Zobrazení slova
+                setTimeout(() => showWords(index + 1), 150); // Další slovo po 150ms
+            } else {
+                // Po zobrazení všech slov začneme s funkcí skrytí a opětovného zobrazení
+                setTimeout(() => {
+                    hideAndShowContent(); // Skrytí a opětovné zobrazení textu
+                }, 500); // Po 500 ms po zobrazení posledního slova
+            }
+        }
+
+        function hideAndShowContent() {
+            const content = document.getElementById("content");
+
+            // Skrytí textu na 2 sekundy
+            content.style.opacity = "0";
+            setTimeout(() => {
+                // Po 2 sekundách zobrazení textu zpět
+                content.style.opacity = "1";
+            }, 2000);
+        }
     </script>
 
 </body>
