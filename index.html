@@ -57,74 +57,62 @@
     </div>
 
       <!-- Zvuky psaní -->
-    <audio id="type-sound-1" src="https://github.com/introduction2/Zor-Kar/raw/refs/heads/main/keyboard1.mp3"></audio>
-    <audio id="type-sound-2" src="https://github.com/introduction2/Zor-Kar/raw/refs/heads/main/keyboard2.mp3"></audio>
-    <audio id="type-sound-3" src="https://github.com/introduction2/Zor-Kar/raw/refs/heads/main/keyboard3.mp3"></audio>
+    <audio id="typewriter-sound-1" src="https://introduction2.github.io/Zor-Kar/zapsplat_technology_computer_laptop_typing_001_99980.mp3"></audio>
+    <audio id="typewriter-sound-2" src="https://introduction2.github.io/Zor-Kar/zapsplat_technology_computer_laptop_typing_004_99983.mp3"></audio>
+    <audio id="typewriter-sound-3" src="https://introduction2.github.io/Zor-Kar/zapsplat_technology_computer_laptop_typing_003_99982.mp3"></audio>
 
     <script>
-        document.getElementById("enter-button").addEventListener("click", function () {
-            this.style.display = "none"; // Skrytí tlačítka
+        document.getElementById("enter-button").addEventListener("click", function() {
+            // Tlačítko zmizí
+            this.style.display = "none";
+            // Zobrazíme text
             const content = document.getElementById("content");
-            content.style.display = "block"; // Zobrazení textu
-            resetText(); // Resetujeme text, aby začal od začátku
-            
-            // Pokusíme se odblokovat přehrávání zvuků
-            let unlockSound = document.getElementById("type-sound-1");
-            unlockSound.play().then(() => {
-                unlockSound.pause();
-                unlockSound.currentTime = 0;
-                showWords(0);
-            }).catch(error => console.log("Prohlížeč blokuje zvuk:", error));
-        });
+            content.style.display = "block";
 
-        function resetText() {
-            let words = document.querySelectorAll("#story-text span");
-            words.forEach(word => {
-                word.style.opacity = "0"; // Skrytí všech slov
-            });
-            document.getElementById("content").style.opacity = "1"; 
-        }
-
-        function showWords(index) {
-            let words = document.querySelectorAll("#story-text span");
-            let sounds = [
-                document.getElementById("type-sound-1"),
-                document.getElementById("type-sound-2"),
-                document.getElementById("type-sound-3")
+            // Seznam zvuků
+            const sounds = [
+                document.getElementById("typewriter-sound-1"),
+                document.getElementById("typewriter-sound-2"),
+                document.getElementById("typewriter-sound-3")
             ];
 
-            if (index < words.length) {
-                words[index].style.opacity = "1"; // Zobrazení slova
+            // Funkce pro zobrazení textu slovo po slovu
+            let words = document.querySelectorAll("#story-text span");
+            let currentIndex = 0;
 
-                // Náhodný zvuk psaní
-                let sound = sounds[Math.floor(Math.random() * sounds.length)];
-                sound.currentTime = 0; // Reset zvuku na začátek
+            function playSound() {
+                const sound = sounds[Math.floor(Math.random() * sounds.length)];
+                sound.currentTime = 0;
                 sound.play();
-
-                setTimeout(() => showWords(index + 1), 150); // Další slovo po 150ms
-            } else {
-                setTimeout(() => {
-                    hideAndShowContent(); // Spustíme skrytí a blikání
-                }, 500); 
             }
-        }
 
-        function hideAndShowContent() {
-            const content = document.getElementById("content");
+            function showWords() {
+                if (currentIndex < words.length) {
+                    words[currentIndex].style.opacity = "1"; // Ukážeme slovo
+                    playSound(); // Pustíme zvuk
+                    currentIndex++;
+                    setTimeout(showWords, 150); // Další slovo po 150 ms
+                } else {
+                    // Po zobrazení všech slov, uděláme zmizení textu
+                    setTimeout(() => {
+                        content.style.opacity = "0";
+                        setTimeout(startBlinking, 3000);
+                    }, 1000);
+                }
+            }
 
-            // Skrytí textu na 2 sekundy
-            content.style.opacity = "0";
-            setTimeout(() => {
-                content.style.opacity = "1"; // Zobrazení zpět
-
-                // Přidání efektu blikání na 3 sekundy
-                content.classList.add("flicker-effect");
+            // Funkce pro blikání textu
+            function startBlinking() {
+                content.style.opacity = "1";
+                content.classList.add("blinking");
                 setTimeout(() => {
-                    content.classList.remove("flicker-effect"); // Po 3s odstranění efektu
+                    content.classList.remove("blinking");
                 }, 3000);
+            }
 
-            }, 2000);
-        }
+            // Spustíme zobrazení textu
+            showWords();
+        });
     </script>
 
 </body>
