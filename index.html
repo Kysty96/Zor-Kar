@@ -5,12 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planeta Zor'Kar</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        #story-text span {
-            opacity: 0; /* Na začátku je každé slovo skryté */
-            transition: opacity 0.5s ease; /* Efekt pro plynulé zobrazení */
-        }
-    </style>
 </head>
 <body>
 
@@ -43,7 +37,7 @@
         </p>
     </div>
 
-    <script>
+     <script>
         // Když uživatel klikne na tlačítko
         document.getElementById("enter-button").addEventListener("click", function() {
             // Tlačítko zmizí
@@ -53,26 +47,45 @@
             const content = document.getElementById("content");
             content.style.display = "block";
 
-            // Zavoláme funkci pro zobrazení textu slovo po slovu
-            showWords();
-        });
+            // Text k zobrazení
+            const storyText = "Příběh planety Zor’Kar “Kdesi v hlubokém vesmíru, za mlhovinami zapomenutých hvězd, se nachází planeta Zor’Kar. Svět plný tajemné energie, kterou její obyvatelé nazývají Essentia. Tato síla dala vzniknout jedné z nejmocnějších civilizací v galaxii – rasám válečníků, učenců a mystiků, kteří žili v harmonii s energií svého světa. Ale klid netrvá věčně… Z temných koutů kosmu přichází hrozba. Nepřátelská říše Xel’Thar se snaží pohltit Essentii a zničit rovnováhu planety. Proto byli povoláni největší hrdinové Zor’Kar – válečníci, kováři, lučišníci, vědci i šamani. Každý má své místo v této epické bitvě o přežití. Toto je tvůj příběh. Vydej se na cestu sběru bytostí, sestav svou vlastní armádu a objev osud Zor’Kar!”";
 
-        // Funkce pro zobrazení slov po kliknutí
-        function showWords() {
-            const words = document.querySelectorAll("#story-text span");
-            let index = 0;
+            // Rozdělení textu na jednotlivá slova
+            const words = storyText.split(" ");
+            const storyParagraph = document.getElementById("story-text");
 
-            function displayNextWord() {
-                if (index < words.length) {
-                    words[index].style.opacity = "1";  // Zobrazíme slovo
-                    index++;
-                    setTimeout(displayNextWord, 200);  // Další slovo po 200ms
+            let currentWord = 0;
+
+            // Funkce pro zobrazení slov jedno po druhém
+            function showWords() {
+                if (currentWord < words.length) {
+                    const wordSpan = document.createElement("span");
+                    wordSpan.textContent = words[currentWord] + " ";
+                    storyParagraph.appendChild(wordSpan);
+
+                    wordSpan.style.opacity = "0";
+                    setTimeout(() => {
+                        wordSpan.style.transition = "opacity 0.3s";
+                        wordSpan.style.opacity = "1";  // Slovo se objeví
+                    }, 100 * currentWord);
+
+                    currentWord++;
+
+                    setTimeout(showWords, 150);
+                } else {
+                    // Po zobrazení všech slov, text zmizí a pak se opět objeví
+                    setTimeout(() => {
+                        storyParagraph.style.opacity = "0";  // Text zmizí
+                        setTimeout(() => {
+                            storyParagraph.style.opacity = "1";  // Text se znovu objeví
+                        }, 2000);  // Po 2 sekundách
+                    }, 1000);  // Po zobrazení všech slov
                 }
             }
 
-            displayNextWord();
-        }
+            showWords();
+        });
     </script>
 
 </body>
-</html> 
+</html>
