@@ -94,10 +94,7 @@
             setTimeout(showWords, 150);
         } else {
             stopSounds();
-            setTimeout(() => {
-                content.style.opacity = "0";
-                setTimeout(startBlinking, 3000);
-            }, 1000);
+            setTimeout(startBlinking, 3000); // 🟢 Spustí se až po dopsání
         }
     }
 
@@ -111,7 +108,7 @@
     function startBlinking() {
         const fluorescentSound = document.getElementById("fluorescent-light-sound");
 
-        // Vynucené přehrání v rámci uživatelské interakce
+        // 🟢 Nyní se zvuk přehraje až po dopsání textu
         fluorescentSound.play().then(() => {
             console.log("Zvuk zářivky se přehrává");
         }).catch(error => {
@@ -130,10 +127,6 @@
         }, 500);
     }
 
-    // 🟢 Spustíme zvuk zářivky IHNED po kliknutí na tlačítko
-    const fluorescentSound = document.getElementById("fluorescent-light-sound");
-    fluorescentSound.play().catch(error => console.warn("Zvuk zářivky byl blokován:", error));
-
-    showWords();
+    showWords(); // 🟢 Psání začíná ihned, ale zvuk zářivky až po něm
 });
 </script>
