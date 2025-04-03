@@ -115,25 +115,16 @@
         </p>
     </div>
 
-        <script>
+           <script>
         document.getElementById("enter-button").addEventListener("click", function () {
-            let sounds = [
-                document.getElementById("typewriter-sound-1"),
-                document.getElementById("typewriter-sound-2"),
-                document.getElementById("typewriter-sound-3")
-            ];
+            let sound1 = document.getElementById("typewriter-sound-1");
 
-            // Odblokování audia
-            sounds[0].play().then(() => {
-                sounds.forEach(sound => {
-                    sound.pause();
-                    sound.currentTime = 0;
-                });
+            // Nejdřív pustíme tichý zvuk k odblokování audia v prohlížeči
+            sound1.play().then(() => {
+                sound1.pause();
+                sound1.currentTime = 0;
                 enterPlanet();
-            }).catch(error => {
-                console.log("Zvuk blokován:", error);
-                enterPlanet();
-            });
+            }).catch(error => console.log("Zvuk blokován:", error));
         });
 
         function enterPlanet() {
@@ -152,35 +143,35 @@
             function showWords(index) {
                 if (index < words.length) {
                     words[index].style.opacity = "1";
-                    
+
+                    // 🎵 Náhodně vybereme jeden ze tří zvuků
                     let sound = sounds[Math.floor(Math.random() * sounds.length)];
                     sound.currentTime = 0;
                     sound.play();
 
                     setTimeout(() => showWords(index + 1), 200);
                 } else {
+                    // Po dokončení zastavíme všechny zvuky
                     sounds.forEach(sound => {
                         sound.pause();
                         sound.currentTime = 0;
                     });
 
-                    // 1) Po dokončení zmizí text na 3 sekundy
+                    // TEXT ZMIZÍ NA 3 SEKUNDY
                     setTimeout(() => {
-                        content.classList.add("hidden");
+                        document.getElementById("story-text").style.opacity = "0";
+                    }, 1000);
 
-                        // 2) Po 3 sekundách začne blikat jako zářivka
+                    // BLINKÁNÍ JAKO ZÁŘIVKA NA 3 SEKUNDY
+                    setTimeout(() => {
+                        let text = document.getElementById("story-text");
+                        text.style.opacity = "1";
+                        text.classList.add("blinking");
+
                         setTimeout(() => {
-                            content.classList.remove("hidden");
-                            content.classList.add("blinking");
-
-                            // 3) Po dalších 3 sekundách se blikání zastaví
-                            setTimeout(() => {
-                                content.classList.remove("blinking");
-                            }, 3000);
-
+                            text.classList.remove("blinking");
                         }, 3000);
-
-                    }, 3000);
+                    }, 4000);
                 }
             }
 
