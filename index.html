@@ -5,67 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planeta Zor'Kar</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            height: 100%;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: black;
-            font-family: Arial, sans-serif;
-            color: white;
-            text-align: center;
-            flex-direction: column;
-        }
-
-        .content {
-            display: none;
-            position: relative;
-            width: 80%;
-            max-width: 800px;
-            opacity: 0;
-        }
-
-        .enter-button {
-            background-color: #2F4F4F;
-            color: #9400D3;
-            font-size: 1.5em;
-            padding: 15px 30px;
-            border: none;
-            cursor: pointer;
-            border-radius: 10px;
-            transition: 0.3s;
-        }
-
-        .enter-button:hover {
-            background-color: #000000;
-        }
-
-        .animated-text span {
-            opacity: 0;
-            transition: opacity 0.2s ease-in;
-        }
-
-        @keyframes blink {
-            0% { opacity: 0; }    
-            20% { opacity: 1; }  
-            40% { opacity: 0.2; }  
-            60% { opacity: 1; }  
-            80% { opacity: 0.5; }  
-            100% { opacity: 1; } 
-        }
-
-        .blinking {
-            animation: blink 0.3s step-start infinite;
-        }
-    </style>
 </head>
 
 <body>
@@ -75,7 +14,7 @@
     <audio id="typewriter-sound-2" src="keyboard2.mp3"></audio>
     <audio id="typewriter-sound-3" src="keyboard3.mp3"></audio>
     
-    <button class="enter-button" id="enter-button">Vstup na planetu Zor'Kar</button>
+    <button class="enter-button" id="enter-button">Vítejte na planetě Zor'Kar</button>
 
     <div class="content" id="content">
         <h1>Vítej!!!</h1>
@@ -102,11 +41,11 @@
         </p>
     </div>
 
-      <script>
+    <script>
         document.getElementById("enter-button").addEventListener("click", function () {
             let sound1 = document.getElementById("typewriter-sound-1");
             
-            // Pro odblokování zvuku
+            // Pro odblokování zvuku v prohlížeči
             sound1.play().then(() => {
                 sound1.pause();
                 sound1.currentTime = 0;
