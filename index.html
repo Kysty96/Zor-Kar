@@ -109,22 +109,26 @@
         }
 
         function startBlinking() {
-            const fluorescentSound = document.getElementById("fluorescent-light-sound");
-            fluorescentSound.currentTime = 0;
+    const fluorescentSound = document.getElementById("fluorescent-light-sound");
+    fluorescentSound.currentTime = 0;
 
-            // Pokus o přehrání zvuku se zachycením chyby
-            fluorescentSound.play().catch(error => console.log("Zvuk blokován:", error));
+    // Spuštění zvuku s chytrým zpracováním chyby
+    fluorescentSound.play().then(() => {
+        console.log("Zvuk zářivky přehráván");
+    }).catch(error => {
+        console.warn("Prohlížeč blokoval zvuk zářivky:", error);
+    });
 
-            let blinkCount = 0;
-            const blinkInterval = setInterval(() => {
-                content.style.opacity = (content.style.opacity === "1") ? "0" : "1";
-                blinkCount++;
-                if (blinkCount >= 6) { 
-                    clearInterval(blinkInterval);
-                    content.style.opacity = "1"; 
-                }
-            }, 500);
+    let blinkCount = 0;
+    const blinkInterval = setInterval(() => {
+        content.style.opacity = (content.style.opacity === "1") ? "0" : "1";
+        blinkCount++;
+        if (blinkCount >= 6) { 
+            clearInterval(blinkInterval);
+            content.style.opacity = "1"; 
         }
+    }, 500);
+}
 
         showWords();
     });
