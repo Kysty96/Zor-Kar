@@ -66,73 +66,74 @@
 
     <script>
     document.getElementById("enter-button").addEventListener("click", function() {
-        this.style.display = "none"; 
-        const content = document.getElementById("content");
-        content.style.display = "block"; 
-        
-        const words = document.querySelectorAll("#story-text span");
-        words.forEach(word => word.style.opacity = "0");
-
-        const sounds = [
-            document.getElementById("typewriter-sound-1"),
-            document.getElementById("typewriter-sound-2"),
-            document.getElementById("typewriter-sound-3")
-        ];
-
-        function playSound() {
-            const sound = sounds[Math.floor(Math.random() * sounds.length)];
-            sound.currentTime = 0;
-            sound.play();
-        }
-
-        let currentIndex = 0;
-        function showWords() {
-            if (currentIndex < words.length) {
-                words[currentIndex].style.opacity = "1";
-                playSound();
-                currentIndex++;
-                setTimeout(showWords, 150);
-            } else {
-                stopSounds();
-                setTimeout(() => {
-                    content.style.opacity = "0";
-                    setTimeout(startBlinking, 3000);
-                }, 1000);
-            }
-        }
-
-        function stopSounds() {
-            sounds.forEach(sound => {
-                sound.pause();
-                sound.currentTime = 0;
-            });
-        }
-
-        function startBlinking() {
-    const fluorescentSound = document.getElementById("fluorescent-light-sound");
-
-    // Reset zvuku a pokus o přehrání v rámci uživatelské interakce
-    fluorescentSound.pause();
-    fluorescentSound.currentTime = 0;
-    fluorescentSound.play().then(() => {
-        console.log("Zvuk zářivky se přehrává");
-    }).catch(error => {
-        console.warn("Zvuk zářivky byl blokován:", error);
-    });
-
-    // Efekt blikání textu
-    let blinkCount = 0;
+    this.style.display = "none"; 
     const content = document.getElementById("content");
-    const blinkInterval = setInterval(() => {
-        content.style.opacity = (content.style.opacity === "1") ? "0" : "1";
-        blinkCount++;
-        if (blinkCount >= 6) { 
-            clearInterval(blinkInterval);
-            content.style.opacity = "1"; 
-        }
-    }, 500);
-}
+    content.style.display = "block"; 
 
-        showWords();
-    });
+    const words = document.querySelectorAll("#story-text span");
+    words.forEach(word => word.style.opacity = "0");
+
+    const sounds = [
+        document.getElementById("typewriter-sound-1"),
+        document.getElementById("typewriter-sound-2"),
+        document.getElementById("typewriter-sound-3")
+    ];
+
+    function playSound() {
+        const sound = sounds[Math.floor(Math.random() * sounds.length)];
+        sound.currentTime = 0;
+        sound.play().catch(error => console.log("Zvuk psaní blokován:", error));
+    }
+
+    let currentIndex = 0;
+    function showWords() {
+        if (currentIndex < words.length) {
+            words[currentIndex].style.opacity = "1";
+            playSound();
+            currentIndex++;
+            setTimeout(showWords, 150);
+        } else {
+            stopSounds();
+            setTimeout(() => {
+                content.style.opacity = "0";
+                setTimeout(startBlinking, 3000);
+            }, 1000);
+        }
+    }
+
+    function stopSounds() {
+        sounds.forEach(sound => {
+            sound.pause();
+            sound.currentTime = 0;
+        });
+    }
+
+    function startBlinking() {
+        const fluorescentSound = document.getElementById("fluorescent-light-sound");
+
+        // Vynucené přehrání v rámci uživatelské interakce
+        fluorescentSound.play().then(() => {
+            console.log("Zvuk zářivky se přehrává");
+        }).catch(error => {
+            console.warn("Zvuk zářivky blokován:", error);
+        });
+
+        // Efekt blikání
+        let blinkCount = 0;
+        const blinkInterval = setInterval(() => {
+            content.style.opacity = (content.style.opacity === "1") ? "0" : "1";
+            blinkCount++;
+            if (blinkCount >= 6) { 
+                clearInterval(blinkInterval);
+                content.style.opacity = "1"; 
+            }
+        }, 500);
+    }
+
+    // 🟢 Spustíme zvuk zářivky IHNED po kliknutí na tlačítko
+    const fluorescentSound = document.getElementById("fluorescent-light-sound");
+    fluorescentSound.play().catch(error => console.warn("Zvuk zářivky byl blokován:", error));
+
+    showWords();
+});
 </script>
