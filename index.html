@@ -115,13 +115,12 @@
         </p>
     </div>
 
-    <script>
+      <script>
         document.getElementById("enter-button").addEventListener("click", function () {
             let sound1 = document.getElementById("typewriter-sound-1");
             let sound2 = document.getElementById("typewriter-sound-2");
             let sound3 = document.getElementById("typewriter-sound-3");
 
-            // Nejdřív pustíme tichý zvuk k odblokování audia v prohlížeči
             sound1.play().then(() => {
                 sound1.pause();
                 sound1.currentTime = 0;
@@ -136,7 +135,7 @@
                 });
             }).catch(error => {
                 console.log("Zvuk blokován:", error);
-                enterPlanet(); // Pokračujeme, i když jsou zvuky blokovány
+                enterPlanet();
             });
         });
 
@@ -156,23 +155,35 @@
             function showWords(index) {
                 if (index < words.length) {
                     words[index].style.opacity = "1";
-
-                    // 🎵 Náhodně vybereme jeden ze tří zvuků
+                    
                     let sound = sounds[Math.floor(Math.random() * sounds.length)];
                     sound.currentTime = 0;
                     sound.play();
 
                     setTimeout(() => showWords(index + 1), 200);
                 } else {
-                    // Po dokončení zastavíme všechny zvuky
                     sounds.forEach(sound => {
                         sound.pause();
                         sound.currentTime = 0;
                     });
 
-                    // Po dokončení animace textu spustíme blikání jako zářivka
-                    let content = document.getElementById('content');
-                    content.classList.add('blinking');
+                    // 1) Po dokončení zmizí text na 3 sekundy
+                    setTimeout(() => {
+                        content.classList.add("hidden");
+
+                        // 2) Po 3 sekundách začne blikat jako zářivka
+                        setTimeout(() => {
+                            content.classList.remove("hidden");
+                            content.classList.add("blinking");
+
+                            // 3) Po dalších 3 sekundách se blikání zastaví
+                            setTimeout(() => {
+                                content.classList.remove("blinking");
+                            }, 3000);
+
+                        }, 3000);
+
+                    }, 1000);
                 }
             }
 
