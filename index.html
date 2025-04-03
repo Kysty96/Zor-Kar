@@ -14,7 +14,27 @@
     <!-- Skrytý obsah, který se zobrazí po kliknutí -->
     <div class="content" id="content" style="display: none;">
         <h1>Vítej na planetě Zor'Kar!</h1>
-        <p>Text bude zobrazen po kliknutí na tlačítko.</p>
+        <p id="story-text">
+            <span>Kdesi</span> <span>v</span> <span>hlubokém</span> <span>vesmíru,</span>  
+            <span>za</span> <span>mlhovinami</span> <span>zapomenutých</span> <span>hvězd,</span>  
+            <span>se</span> <span>nachází</span> <span>planeta</span> <span>Zor’Kar.</span>  
+            <span>Svět</span> <span>plný</span> <span>tajemné</span> <span>energie,</span>  
+            <span>kterou</span> <span>její</span> <span>obyvatelé</span> <span>nazývají</span> <span>Essentia.</span>  
+            <span>Tato</span> <span>síla</span> <span>dala</span> <span>vzniknout</span> <span>jedné</span> <span>z</span> <span>nejmocnějších</span> <span>civilizací</span> <span>v</span> <span>galaxii</span> <span>–</span> <span>rasám</span> <span>válečníků,</span> <span>učenců</span> <span>a</span> <span>mystiků,</span> <span>kteří</span> <span>žili</span> <span>v</span> <span>harmonii</span> <span>s</span> <span>energií</span> <span>svého</span> <span>světa.</span>
+
+            <span>Ale</span> <span>klid</span> <span>netrvá</span> <span>věčně…</span>  
+            <span>Z</span> <span>temných</span> <span>koutů</span> <span>kosmu</span>  
+            <span>přichází</span> <span>hrozba.</span>  
+            <span>Nepřátelská</span> <span>říše</span> <span>Xel’Thar</span>  
+            <span>se</span> <span>snaží</span> <span>pohltit</span> <span>Essentii</span>  
+            <span>a</span> <span>zničit</span> <span>rovnováhu</span> <span>planety.</span>  
+            <span>Proto</span> <span>byli</span> <span>povoláni</span> <span>největší</span> <span>hrdinové</span> <span>Zor’Kar</span> <span>–</span> <span>válečníci,</span> <span>kováři,</span> <span>lučišníci,</span> <span>vědci</span> <span>i</span> <span>šamani.</span>  
+            <span>Každý</span> <span>má</span> <span>své</span> <span>místo</span> <span>v</span> <span>této</span> <span>epické</span> <span>bitvě</span> <span>o</span> <span>přežití.</span>
+
+            <span>Toto</span> <span>je</span> <span>tvůj</span> <span>příběh.</span>  
+            <span>Vydej</span> <span>se</span> <span>na</span> <span>cestu</span> <span>sběru</span> <span>bytostí,</span>  
+            <span>sestav</span> <span>svou</span> <span>vlastní</span> <span>armádu</span> <span>a</span> <span>objev</span> <span>osud</span> <span>Zor’Kar!</span>
+        </p>
     </div>
 
     <script>
@@ -26,7 +46,26 @@
             // Zobrazíme text
             const content = document.getElementById("content");
             content.style.display = "block";
+
+            // Zavoláme funkci pro zobrazení textu slovo po slovu
+            showWords();
         });
+
+        // Funkce pro zobrazení slov po kliknutí
+        function showWords() {
+            const words = document.querySelectorAll("#story-text span");
+            let index = 0;
+
+            function displayNextWord() {
+                if (index < words.length) {
+                    words[index].style.opacity = "1";  // Zobrazíme slovo
+                    index++;
+                    setTimeout(displayNextWord, 200);  // Další slovo po 200ms
+                }
+            }
+
+            displayNextWord();
+        }
     </script>
 
 </body>
