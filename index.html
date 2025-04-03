@@ -115,24 +115,21 @@
         </p>
     </div>
 
-      <script>
+        <script>
         document.getElementById("enter-button").addEventListener("click", function () {
-            let sound1 = document.getElementById("typewriter-sound-1");
-            let sound2 = document.getElementById("typewriter-sound-2");
-            let sound3 = document.getElementById("typewriter-sound-3");
+            let sounds = [
+                document.getElementById("typewriter-sound-1"),
+                document.getElementById("typewriter-sound-2"),
+                document.getElementById("typewriter-sound-3")
+            ];
 
-            sound1.play().then(() => {
-                sound1.pause();
-                sound1.currentTime = 0;
-                sound2.play().then(() => {
-                    sound2.pause();
-                    sound2.currentTime = 0;
-                    sound3.play().then(() => {
-                        sound3.pause();
-                        sound3.currentTime = 0;
-                        enterPlanet();
-                    });
+            // Odblokování audia
+            sounds[0].play().then(() => {
+                sounds.forEach(sound => {
+                    sound.pause();
+                    sound.currentTime = 0;
                 });
+                enterPlanet();
             }).catch(error => {
                 console.log("Zvuk blokován:", error);
                 enterPlanet();
@@ -183,7 +180,7 @@
 
                         }, 3000);
 
-                    }, 1000);
+                    }, 3000);
                 }
             }
 
