@@ -98,12 +98,22 @@
                     currentIndex++;
                     setTimeout(showWords, 150); // Další slovo po 150 ms
                 } else {
+                    // Po zobrazení všech slov, zastavíme zvuky
+                    stopSounds();
                     // Po zobrazení všech slov, uděláme zmizení textu
                     setTimeout(() => {
                         content.style.opacity = "0";
                         setTimeout(startBlinking, 3000);
                     }, 1000);
                 }
+            }
+
+            // Funkce pro zastavení všech zvuků
+            function stopSounds() {
+                sounds.forEach(sound => {
+                    sound.pause();
+                    sound.currentTime = 0;
+                });
             }
 
             // Funkce pro blikání textu
