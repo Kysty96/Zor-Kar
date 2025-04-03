@@ -6,38 +6,39 @@
 }
 
 html, body {
-    height: 100%; /* Zajistí, že stránka zabere celou výšku */
-    width: 100%;  /* Zajistí, že stránka zabere celou šířku */
+    height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: black;
     background-image: url('Flux_Dev_A_mystical_emblem_representing_the_ancient_civilizati_0.jpeg');
 }
+
 body {
-    position: relative; /* Umístí obsah a pozadí relativně */
+    position: relative;
 }
 
 /* Element pro vodoznak */
 .background {
     background-image: url('Flux_Dev_A_mystical_emblem_representing_the_ancient_civilizati_0.jpeg');
     position: absolute;
-    top: 50%;  /* Umístí vodoznak na střed vertikálně */
-    left: 50%; /* Umístí vodoznak na střed horizontálně */
-    transform: translate(-50%, -50%); /* Posune vodoznak zpět, aby byl přesně uprostřed */
-    width: 100%;  /* Velikost vodoznaku (můžeš upravit dle potřeby) */
-    height: 100%; /* Velikost vodoznaku (můžeš upravit dle potřeby) */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: contain; /* Vodoznak bude přizpůsoben velikosti, ale stále zachová poměr */
-    z-index: 1; /* Umístí vodoznak pod text */
-    opacity: 0.6; /* Nastaví průhlednost (0 = úplně průhledné, 1 = neprůhledné) */
+    background-size: contain;
+    z-index: 1;
+    opacity: 0.6;
 }
 
 /* Textový obsah */
 .content {
     position: relative;
-    z-index: 2; /* Text bude nad vodoznakem */
+    z-index: 2;
     color: white;
     text-align: center;
     padding: 20px;
@@ -46,9 +47,57 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 50%; /* Zabírá celou výšku stránky */
+    height: 50%;
 }
 
+/* Tlačítko pro vstup na planetu */
+.enter-button {
+    background-color: #2F4F4F;
+    color: #9400D3;
+    font-size: 1.5em;
+    padding: 15px 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 0.3s;
+    z-index: 2;
+}
+
+.enter-button:hover {
+    background-color: #000000;
+}
+
+/* Styl pro zobrazování slov */
+.animated-text span {
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
+}
+
+/* Animace blikání textu jako zářivka */
+@keyframes blink {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    40% { opacity: 0.2; }
+    60% { opacity: 1; }
+    80% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.blinking {
+    animation: blink 3s ease-in-out;
+}
+
+/* Animace postupného zmizení textu */
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.hidden {
+    animation: fadeOut 3s forwards;
+}
+
+/* Třpytivý efekt textu */
 @keyframes trpyt {
     0% { text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff; }
     50% { text-shadow: 0 0 10px #ffffff, 0 0 20px #ff00ff; }
@@ -67,10 +116,10 @@ body {
 h1 {
     font-size: 3em;
     margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Stín pro lepší čitelnost textu */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 p {
     font-size: 1em;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Stín pro lepší čitelnost textu */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
