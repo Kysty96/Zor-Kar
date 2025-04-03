@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planeta Zor'Kar</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Efekt blikání */
+        @keyframes flicker {
+            0% { opacity: 1; }
+            10% { opacity: 0.2; }
+            20% { opacity: 0.8; }
+            30% { opacity: 0.3; }
+            40% { opacity: 0.9; }
+            50% { opacity: 0.1; }
+            60% { opacity: 1; }
+            70% { opacity: 0.4; }
+            80% { opacity: 1; }
+            90% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        .flicker-effect {
+            animation: flicker 0.2s infinite;
+        }
+    </style>
 </head>
 <body>
 
@@ -38,7 +57,6 @@
     </div>
 
       <script>
-        // Když uživatel klikne na tlačítko
         document.getElementById("enter-button").addEventListener("click", function () {
             this.style.display = "none"; // Skrytí tlačítka
             const content = document.getElementById("content");
@@ -48,12 +66,11 @@
         });
 
         function resetText() {
-            // Skrytí všech již zobrazených slov
             let words = document.querySelectorAll("#story-text span");
             words.forEach(word => {
-                word.style.opacity = "0";
+                word.style.opacity = "0"; // Skrytí všech slov
             });
-            document.getElementById("content").style.opacity = "1"; // Zajištění, že celý obsah bude opět viditelný
+            document.getElementById("content").style.opacity = "1"; 
         }
 
         function showWords(index) {
@@ -63,10 +80,9 @@
                 words[index].style.opacity = "1"; // Zobrazení slova
                 setTimeout(() => showWords(index + 1), 150); // Další slovo po 150ms
             } else {
-                // Po zobrazení všech slov začneme s funkcí skrytí a opětovného zobrazení
                 setTimeout(() => {
-                    hideAndShowContent(); // Skrytí a opětovné zobrazení textu
-                }, 500); // Po 500 ms po zobrazení posledního slova
+                    hideAndShowContent(); // Spustíme skrytí a blikání
+                }, 500); 
             }
         }
 
@@ -76,8 +92,14 @@
             // Skrytí textu na 2 sekundy
             content.style.opacity = "0";
             setTimeout(() => {
-                // Po 2 sekundách zobrazení textu zpět
-                content.style.opacity = "1";
+                content.style.opacity = "1"; // Zobrazení zpět
+
+                // Přidání efektu blikání na 3 sekundy
+                content.classList.add("flicker-effect");
+                setTimeout(() => {
+                    content.classList.remove("flicker-effect"); // Po 3s odstranění efektu
+                }, 3000);
+
             }, 2000);
         }
     </script>
