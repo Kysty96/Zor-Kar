@@ -169,6 +169,10 @@
                         sound.pause();
                         sound.currentTime = 0;
                     });
+
+                    // Po dokončení animace textu spustíme blikání jako zářivka
+                    let content = document.getElementById('content');
+                    content.classList.add('blinking');
                 }
             }
 
