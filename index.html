@@ -8,90 +8,25 @@
 </head>
 <body>
 
-    <!-- Zvuky psaní -->
-    <audio id="typewriter-sound-1" src="https://github.com/introduction2/Zor-Kar/raw/refs/heads/main/keyboard1.mp3"></audio>
-    <audio id="typewriter-sound-2" src="https://github.com/introduction2/Zor-Kar/raw/refs/heads/main/keyboard2.mp3"></audio>
-    <audio id="typewriter-sound-3" src="https://github.com/introduction2/Zor-Kar/raw/refs/heads/main/keyboard3.mp3"></audio>
-
+    <!-- Tlačítko pro zobrazení textu -->
     <button class="enter-button" id="enter-button">Vstup na planetu Zor'Kar</button>
 
+    <!-- Skrytý obsah, který se zobrazí po kliknutí -->
     <div class="content" id="content" style="display: none;">
-        <h1 id="title">Vítej!!!</h1>
-        <p class="animated-text" id="story-text">
-            <span>Kdesi</span> <span>v</span> <span>hlubokém</span> <span>vesmíru,</span>  
-            <span>za</span> <span>mlhovinami</span> <span>zapomenutých</span> <span>hvězd,</span>  
-            <span>se</span> <span>nachází</span> <span>planeta</span> <span>Zor’Kar.</span>  
-            <span>Svět</span> <span>plný</span> <span>tajemné</span> <span>energie,</span>  
-            <span>kterou</span> <span>její</span> <span>obyvatelé</span> <span>nazývají</span> <span>Essentia.</span>  
-
-            <span>Ale</span> <span>klid</span> <span>netrvá</span> <span>věčně…</span>  
-            <span>Z</span> <span>temných</span> <span>koutů</span> <span>kosmu</span>  
-            <span>přichází</span> <span>hrozba.</span>  
-            <span>Nepřátelská</span> <span>říše</span> <span>Xel’Thar</span>  
-            <span>se</span> <span>snaží</span> <span>pohltit</span> <span>Essentii</span>  
-            <span>a</span> <span>zničit</span> <span>rovnováhu</span> <span>planety.</span>  
-        </p>
+        <h1>Vítej na planetě Zor'Kar!</h1>
+        <p>Text bude zobrazen po kliknutí na tlačítko.</p>
     </div>
 
     <script>
-        // Přehrání zvuku pro odblokování přehrávání
-        document.getElementById("enter-button").addEventListener("click", function () {
-            let sound1 = document.getElementById("typewriter-sound-1");
-            
-            // Spustíme tichý zvuk, aby se odblokovalo přehrávání
-            sound1.play().then(() => {
-                sound1.pause();
-                sound1.currentTime = 0;
-                startStory();
-            }).catch(error => console.log("Zvuk blokován:", error));
-        });
+        // Když uživatel klikne na tlačítko
+        document.getElementById("enter-button").addEventListener("click", function() {
+            // Tlačítko zmizí
+            this.style.display = "none";
 
-        function startStory() {
-            // Skrýt tlačítko po kliknutí
-            document.getElementById("enter-button").style.display = "none";
+            // Zobrazíme text
             const content = document.getElementById("content");
             content.style.display = "block";
-
-            let words = document.querySelectorAll("#story-text span");
-            let sounds = [
-                document.getElementById("typewriter-sound-1"),
-                document.getElementById("typewriter-sound-2"),
-                document.getElementById("typewriter-sound-3")
-            ];
-
-            function showWords(index) {
-                if (index < words.length) {
-                    words[index].style.opacity = "1";
-
-                    let sound = sounds[Math.floor(Math.random() * sounds.length)];
-                    sound.currentTime = 0;
-                    sound.play();
-
-                    setTimeout(() => showWords(index + 1), 150); // Čas mezi slovy
-                } else {
-                    sounds.forEach(sound => {
-                        sound.pause();
-                        sound.currentTime = 0;
-                    });
-
-                    // Po zobrazení celého textu zmizení na 3 sekundy
-                    setTimeout(() => {
-                        content.style.opacity = "0";
-                        setTimeout(startBlinking, 3000); // Čekání na blikání
-                    }, 1000);
-                }
-            }
-
-            function startBlinking() {
-                content.style.opacity = "1";
-                content.classList.add("blinking");
-                setTimeout(() => {
-                    content.classList.remove("blinking");
-                }, 3000); // Čas trvání blikání
-            }
-
-            showWords(0);
-        }
+        });
     </script>
 
 </body>
