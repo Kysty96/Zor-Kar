@@ -79,6 +79,14 @@
             document.getElementById("typewriter-sound-3")
         ];
 
+        const fluorescentSound = document.getElementById("fluorescent-light-sound");
+
+        // **🔴 HACK pro iOS Safari** – zahrajeme zvuk hned při prvním kliknutí, ale ihned ho zastavíme.
+        fluorescentSound.play().then(() => {
+            fluorescentSound.pause();
+            fluorescentSound.currentTime = 0;
+        }).catch(error => console.warn("Zvuk zářivky byl blokován:", error));
+
         function playSound() {
             const sound = sounds[Math.floor(Math.random() * sounds.length)];
             sound.currentTime = 0;
@@ -106,13 +114,9 @@
         }
 
         function startBlinking() {
-            const fluorescentSound = document.getElementById("fluorescent-light-sound");
-            
-            // Přehraje zvuk zářivky
+            // **Znovu spustíme zvuk zářivky, tentokrát to už iOS povolí**
             fluorescentSound.currentTime = 0;
-            fluorescentSound.play().catch(error => {
-                console.warn("Zvuk zářivky byl blokován:", error);
-            });
+            fluorescentSound.play().catch(error => console.warn("Zvuk zářivky byl blokován:", error));
 
             // Blikání textu
             let blinkCount = 0;
