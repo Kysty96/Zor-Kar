@@ -65,90 +65,67 @@
     <audio id="fluorescent-light-sound" src="https://introduction2.github.io/Zor-Kar/zapsplat_household_fluorescent_bulb_light_on_starter_hum_buzz_004_111459.mp3"></audio>
 
     <script>
-        // Když uživatel klikne na tlačítko
-        document.getElementById("enter-button").addEventListener("click", function() {
-            // Tlačítko zmizí
-            this.style.display = "none";
-            // Zobrazíme text
-            const content = document.getElementById("content");
-            content.style.display = "block";
-            // Reset textu (skrytí všech spanů)
-            const words = document.querySelectorAll("#story-text span");
-            words.forEach(word => {
-                word.style.opacity = "0"; // Skryjeme všechny span elementy
-            });
+    document.getElementById("enter-button").addEventListener("click", function() {
+        this.style.display = "none"; 
+        const content = document.getElementById("content");
+        content.style.display = "block"; 
+        
+        const words = document.querySelectorAll("#story-text span");
+        words.forEach(word => word.style.opacity = "0");
 
-            // Seznam zvuků
-            const sounds = [
-                document.getElementById("typewriter-sound-1"),
-                document.getElementById("typewriter-sound-2"),
-                document.getElementById("typewriter-sound-3")
-            ];
+        const sounds = [
+            document.getElementById("typewriter-sound-1"),
+            document.getElementById("typewriter-sound-2"),
+            document.getElementById("typewriter-sound-3")
+        ];
 
-            // Funkce pro přehrání zvuku
-            function playSound() {
-                const sound = sounds[Math.floor(Math.random() * sounds.length)];
-                sound.currentTime = 0;
-                sound.play();
-            }
+        function playSound() {
+            const sound = sounds[Math.floor(Math.random() * sounds.length)];
+            sound.currentTime = 0;
+            sound.play();
+        }
 
-            // Funkce pro zobrazení textu slovo po slovu
-            let currentIndex = 0;
-            function showWords() {
-                if (currentIndex < words.length) {
-                    words[currentIndex].style.opacity = "1"; // Ukážeme slovo
-                    playSound(); // Pustíme zvuk
-                    currentIndex++;
-                    setTimeout(showWords, 150); // Další slovo po 150 ms
-                } else {
-                    // Po zobrazení všech slov, zastavíme zvuky
-                    stopSounds();
-                    // Po zobrazení všech slov, uděláme zmizení textu
-                    setTimeout(() => {
-                        content.style.opacity = "0";
-                        setTimeout(startBlinking, 3000);
-                    }, 1000);
-                }
-            }
-
-            // Funkce pro zastavení všech zvuků
-            function stopSounds() {
-                sounds.forEach(sound => {
-                    sound.pause();
-                    sound.currentTime = 0;
-                });
-            }
-
-            // Funkce pro blikání textu a zvuk zářivky
-            function startBlinking() {
-                // Pustíme zvuk zářivky
-                const fluorescentSound = document.getElementById("fluorescent-light-sound");
-                fluorescentSound.currentTime = 0;
-                fluorescentSound.play();
-
-                // Blikání textu
-                content.classList.add("blinking");
+        let currentIndex = 0;
+        function showWords() {
+            if (currentIndex < words.length) {
+                words[currentIndex].style.opacity = "1";
+                playSound();
+                currentIndex++;
+                setTimeout(showWords, 150);
+            } else {
+                stopSounds();
                 setTimeout(() => {
-                    content.classList.remove("blinking");
-                }, 3000); // Bliká 3 sekundy
-            }
-
-            // Spustíme psaní
-            showWords();
-        });
-    </script>
-
-    <style>
-        .blinking {
-            animation: blink 1s step-start 0s infinite;
-        }
-
-        @keyframes blink {
-            50% {
-                opacity: 0;
+                    content.style.opacity = "0";
+                    setTimeout(startBlinking, 3000);
+                }, 1000);
             }
         }
-    </style>
 
-</body>
-</html>
+        function stopSounds() {
+            sounds.forEach(sound => {
+                sound.pause();
+                sound.currentTime = 0;
+            });
+        }
+
+        function startBlinking() {
+            const fluorescentSound = document.getElementById("fluorescent-light-sound");
+            fluorescentSound.currentTime = 0;
+
+            // Pokus o přehrání zvuku se zachycením chyby
+            fluorescentSound.play().catch(error => console.log("Zvuk blokován:", error));
+
+            let blinkCount = 0;
+            const blinkInterval = setInterval(() => {
+                content.style.opacity = (content.style.opacity === "1") ? "0" : "1";
+                blinkCount++;
+                if (blinkCount >= 6) { 
+                    clearInterval(blinkInterval);
+                    content.style.opacity = "1"; 
+                }
+            }, 500);
+        }
+
+        showWords();
+    });
+</script>
