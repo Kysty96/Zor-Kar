@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planeta Zor'Kar</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Zachováno původní CSS -->
+    <link rel="stylesheet" href="styles.css">
     <style>
         * {
             margin: 0;
@@ -63,7 +63,7 @@
         }
 
         .blinking {
-            animation: blink 0.5s infinite;
+            animation: blink 0.3s step-start 10;
         }
     </style>
 </head>
@@ -99,27 +99,14 @@
             <span>Nepřátelská</span> <span>říše</span> <span>Xel’Thar</span>  
             <span>se</span> <span>snaží</span> <span>pohltit</span> <span>Essentii</span>  
             <span>a</span> <span>zničit</span> <span>rovnováhu</span> <span>planety.</span>  
-            <span>Proto</span> <span>byli</span> <span>povoláni</span>  
-            <span>největší</span> <span>hrdinové</span> <span>Zor’Kar</span> –  
-            <span>válečníci,</span> <span>kováři,</span> <span>lučišníci,</span>  
-            <span>vědci</span> <span>i</span> <span>šamani.</span>  
-            <span>Každý</span> <span>má</span> <span>své</span> <span>místo</span>  
-            <span>v</span> <span>této</span> <span>epické</span> <span>bitvě</span>  
-            <span>o</span> <span>přežití.</span>  
-
-            <span>Toto</span> <span>je</span> <span>tvůj</span> <span>příběh.</span>  
-            <span>Vydej</span> <span>se</span> <span>na</span> <span>cestu</span>  
-            <span>sběru</span> <span>bytostí,</span> <span>sestav</span> <span>svou</span>  
-            <span>vlastní</span> <span>armádu</span> <span>a</span> <span>objev</span>  
-            <span>osud</span> <span>Zor’Kar!</span>
         </p>
     </div>
 
-           <script>
+    <script>
         document.getElementById("enter-button").addEventListener("click", function () {
             let sound1 = document.getElementById("typewriter-sound-1");
-
-            // Nejdřív pustíme tichý zvuk k odblokování audia v prohlížeči
+            
+            // Pro odblokování zvuku
             sound1.play().then(() => {
                 sound1.pause();
                 sound1.currentTime = 0;
@@ -157,21 +144,22 @@
                         sound.currentTime = 0;
                     });
 
-                    // TEXT ZMIZÍ NA 3 SEKUNDY
+                    // Necháme text zmizet
                     setTimeout(() => {
                         document.getElementById("story-text").style.opacity = "0";
-                    }, 1000);
+                    }, 2000);
 
-                    // BLINKÁNÍ JAKO ZÁŘIVKA NA 3 SEKUNDY
+                    // Po 3s začne blikat jako zářivka
                     setTimeout(() => {
-                        let text = document.getElementById("story-text");
-                        text.style.opacity = "1";
-                        text.classList.add("blinking");
+                        document.getElementById("story-text").classList.add("blinking");
 
+                        // Po 3s blikání ustane a text se ustálí
                         setTimeout(() => {
-                            text.classList.remove("blinking");
+                            document.getElementById("story-text").classList.remove("blinking");
+                            document.getElementById("story-text").style.opacity = "1";
                         }, 3000);
-                    }, 4000);
+
+                    }, 5000);
                 }
             }
 
