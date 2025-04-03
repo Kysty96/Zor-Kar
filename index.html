@@ -64,69 +64,68 @@
     <!-- Zvuk zářivky -->
     <audio id="fluorescent-light-sound" src="https://introduction2.github.io/Zor-Kar/zapsplat_household_fluorescent_bulb_light_on_starter_hum_buzz_004_111459.mp3"></audio>
 
-    <script>
+   <script>
     document.getElementById("enter-button").addEventListener("click", function() {
-    this.style.display = "none"; 
-    const content = document.getElementById("content");
-    content.style.display = "block"; 
+        this.style.display = "none"; 
+        const content = document.getElementById("content");
+        content.style.display = "block"; 
+        
+        const words = document.querySelectorAll("#story-text span");
+        words.forEach(word => word.style.opacity = "0");
 
-    const words = document.querySelectorAll("#story-text span");
-    words.forEach(word => word.style.opacity = "0");
+        const sounds = [
+            document.getElementById("typewriter-sound-1"),
+            document.getElementById("typewriter-sound-2"),
+            document.getElementById("typewriter-sound-3")
+        ];
 
-    const sounds = [
-        document.getElementById("typewriter-sound-1"),
-        document.getElementById("typewriter-sound-2"),
-        document.getElementById("typewriter-sound-3")
-    ];
-
-    function playSound() {
-        const sound = sounds[Math.floor(Math.random() * sounds.length)];
-        sound.currentTime = 0;
-        sound.play().catch(error => console.log("Zvuk psaní blokován:", error));
-    }
-
-    let currentIndex = 0;
-    function showWords() {
-        if (currentIndex < words.length) {
-            words[currentIndex].style.opacity = "1";
-            playSound();
-            currentIndex++;
-            setTimeout(showWords, 150);
-        } else {
-            stopSounds();
-            setTimeout(startBlinking, 3000); // 🟢 Spustí se až po dopsání
-        }
-    }
-
-    function stopSounds() {
-        sounds.forEach(sound => {
-            sound.pause();
+        function playSound() {
+            const sound = sounds[Math.floor(Math.random() * sounds.length)];
             sound.currentTime = 0;
-        });
-    }
+            sound.play();
+        }
 
-    function startBlinking() {
-        const fluorescentSound = document.getElementById("fluorescent-light-sound");
-
-        // 🟢 Nyní se zvuk přehraje až po dopsání textu
-        fluorescentSound.play().then(() => {
-            console.log("Zvuk zářivky se přehrává");
-        }).catch(error => {
-            console.warn("Zvuk zářivky blokován:", error);
-        });
-
-        // Efekt blikání
-        let blinkCount = 0;
-        const blinkInterval = setInterval(() => {
-            content.style.opacity = (content.style.opacity === "1") ? "0" : "1";
-            blinkCount++;
-            if (blinkCount >= 6) { 
-                clearInterval(blinkInterval);
-                content.style.opacity = "1"; 
+        let currentIndex = 0;
+        function showWords() {
+            if (currentIndex < words.length) {
+                words[currentIndex].style.opacity = "1";
+                playSound();
+                currentIndex++;
+                setTimeout(showWords, 150);
+            } else {
+                stopSounds();
+                setTimeout(startBlinking, 1000);
             }
-        }, 500);
-    }
+        }
 
-    showWords(); // 🟢 Psání začíná ihned, ale zvuk zářivky až po něm
-});
+        function stopSounds() {
+            sounds.forEach(sound => {
+                sound.pause();
+                sound.currentTime = 0;
+            });
+        }
+
+        function startBlinking() {
+            const fluorescentSound = document.getElementById("fluorescent-light-sound");
+            
+            // Přehraje zvuk zářivky
+            fluorescentSound.currentTime = 0;
+            fluorescentSound.play().catch(error => {
+                console.warn("Zvuk zářivky byl blokován:", error);
+            });
+
+            // Blikání textu
+            let blinkCount = 0;
+            const blinkInterval = setInterval(() => {
+                content.style.opacity = (content.style.opacity === "1") ? "0" : "1";
+                blinkCount++;
+                if (blinkCount >= 6) { 
+                    clearInterval(blinkInterval);
+                    content.style.opacity = "1"; 
+                }
+            }, 500);
+        }
+
+        showWords();
+    });
 </script>
