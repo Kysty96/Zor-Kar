@@ -56,13 +56,25 @@
         </p>
     </div>
 
-      <script>
+      <!-- Zvuky psaní -->
+    <audio id="type-sound-1" src="https://github.com/introduction2/Zor-Kar/raw/refs/heads/main/keyboard1.mp3"></audio>
+    <audio id="type-sound-2" src="https://github.com/introduction2/Zor-Kar/raw/refs/heads/main/keyboard2.mp3"></audio>
+    <audio id="type-sound-3" src="https://github.com/introduction2/Zor-Kar/raw/refs/heads/main/keyboard3.mp3"></audio>
+
+    <script>
         document.getElementById("enter-button").addEventListener("click", function () {
             this.style.display = "none"; // Skrytí tlačítka
             const content = document.getElementById("content");
             content.style.display = "block"; // Zobrazení textu
             resetText(); // Resetujeme text, aby začal od začátku
-            showWords(0); // Začneme od začátku
+            
+            // Pokusíme se odblokovat přehrávání zvuků
+            let unlockSound = document.getElementById("type-sound-1");
+            unlockSound.play().then(() => {
+                unlockSound.pause();
+                unlockSound.currentTime = 0;
+                showWords(0);
+            }).catch(error => console.log("Prohlížeč blokuje zvuk:", error));
         });
 
         function resetText() {
@@ -75,9 +87,20 @@
 
         function showWords(index) {
             let words = document.querySelectorAll("#story-text span");
+            let sounds = [
+                document.getElementById("type-sound-1"),
+                document.getElementById("type-sound-2"),
+                document.getElementById("type-sound-3")
+            ];
 
             if (index < words.length) {
                 words[index].style.opacity = "1"; // Zobrazení slova
+
+                // Náhodný zvuk psaní
+                let sound = sounds[Math.floor(Math.random() * sounds.length)];
+                sound.currentTime = 0; // Reset zvuku na začátek
+                sound.play();
+
                 setTimeout(() => showWords(index + 1), 150); // Další slovo po 150ms
             } else {
                 setTimeout(() => {
