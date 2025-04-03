@@ -61,6 +61,9 @@
     <audio id="typewriter-sound-2" src="https://introduction2.github.io/Zor-Kar/zapsplat_technology_computer_laptop_typing_004_99983.mp3"></audio>
     <audio id="typewriter-sound-3" src="https://introduction2.github.io/Zor-Kar/zapsplat_technology_computer_laptop_typing_003_99982.mp3"></audio>
 
+    <!-- Zvuk zářivky -->
+    <audio id="fluorescent-light-sound" src="https://introduction2.github.io/Zor-Kar/zapsplat_household_fluorescent_bulb_light_on_starter_hum_buzz_004_111459.mp3"></audio>
+
     <script>
         // Když uživatel klikne na tlačítko
         document.getElementById("enter-button").addEventListener("click", function() {
@@ -116,19 +119,36 @@
                 });
             }
 
-            // Funkce pro blikání textu
+            // Funkce pro blikání textu a zvuk zářivky
             function startBlinking() {
-                content.style.opacity = "1";
+                // Pustíme zvuk zářivky
+                const fluorescentSound = document.getElementById("fluorescent-light-sound");
+                fluorescentSound.currentTime = 0;
+                fluorescentSound.play();
+
+                // Blikání textu
                 content.classList.add("blinking");
                 setTimeout(() => {
                     content.classList.remove("blinking");
-                }, 3000);
+                }, 3000); // Bliká 3 sekundy
             }
 
-            // Spustíme zobrazení textu
+            // Spustíme psaní
             showWords();
         });
     </script>
+
+    <style>
+        .blinking {
+            animation: blink 1s step-start 0s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
 
 </body>
 </html>
