@@ -6,31 +6,23 @@
     <title>Planeta Zor'Kar</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
     <!-- Zvuky psaní -->
     <audio id="typewriter-sound-1" src="keyboard1.mp3"></audio>
     <audio id="typewriter-sound-2" src="keyboard2.mp3"></audio>
     <audio id="typewriter-sound-3" src="keyboard3.mp3"></audio>
-    
-    <button class="enter-button" id="enter-button">Vítejte na planetě Zor'Kar</button>
+
+    <button class="enter-button" id="enter-button">Vstup na planetu Zor'Kar</button>
 
     <div class="content" id="content">
-        <h1>Vítej!!!</h1>
+        <h1 id="title">Vítej!!!</h1>
         <p class="animated-text" id="story-text">
             <span>Kdesi</span> <span>v</span> <span>hlubokém</span> <span>vesmíru,</span>  
             <span>za</span> <span>mlhovinami</span> <span>zapomenutých</span> <span>hvězd,</span>  
             <span>se</span> <span>nachází</span> <span>planeta</span> <span>Zor’Kar.</span>  
             <span>Svět</span> <span>plný</span> <span>tajemné</span> <span>energie,</span>  
             <span>kterou</span> <span>její</span> <span>obyvatelé</span> <span>nazývají</span> <span>Essentia.</span>  
-
-            <span>Tato</span> <span>síla</span> <span>dala</span> <span>vzniknout</span>  
-            <span>jedné</span> <span>z</span> <span>nejmocnějších</span> <span>civilizací</span>  
-            <span>v</span> <span>galaxii</span> – <span>rasám</span> <span>válečníků,</span>  
-            <span>učenců</span> <span>a</span> <span>mystiků,</span>  
-            <span>kteří</span> <span>žili</span> <span>v</span> <span>harmonii</span>  
-            <span>s</span> <span>energií</span> <span>svého</span> <span>světa.</span>  
 
             <span>Ale</span> <span>klid</span> <span>netrvá</span> <span>věčně…</span>  
             <span>Z</span> <span>temných</span> <span>koutů</span> <span>kosmu</span>  
@@ -45,19 +37,18 @@
         document.getElementById("enter-button").addEventListener("click", function () {
             let sound1 = document.getElementById("typewriter-sound-1");
             
-            // Pro odblokování zvuku v prohlížeči
+            // Spustíme tichý zvuk, aby se odblokovalo přehrávání
             sound1.play().then(() => {
                 sound1.pause();
                 sound1.currentTime = 0;
-                enterPlanet();
+                startStory();
             }).catch(error => console.log("Zvuk blokován:", error));
         });
 
-        function enterPlanet() {
-            document.getElementById('enter-button').style.display = 'none';
-            const content = document.getElementById('content');
-            content.style.display = 'block';
-            content.style.opacity = '1';
+        function startStory() {
+            document.getElementById("enter-button").style.display = "none";
+            const content = document.getElementById("content");
+            content.style.display = "block";
 
             let words = document.querySelectorAll("#story-text span");
             let sounds = [
@@ -70,36 +61,31 @@
                 if (index < words.length) {
                     words[index].style.opacity = "1";
 
-                    // 🎵 Náhodně vybereme jeden ze tří zvuků
                     let sound = sounds[Math.floor(Math.random() * sounds.length)];
                     sound.currentTime = 0;
                     sound.play();
 
-                    setTimeout(() => showWords(index + 1), 200);
+                    setTimeout(() => showWords(index + 1), 150);
                 } else {
-                    // Po dokončení zastavíme všechny zvuky
                     sounds.forEach(sound => {
                         sound.pause();
                         sound.currentTime = 0;
                     });
 
-                    // Necháme text zmizet
+                    // Po zobrazení celého textu zmizení na 3 sekundy
                     setTimeout(() => {
-                        document.getElementById("story-text").style.opacity = "0";
-                    }, 2000);
-
-                    // Po 3s začne blikat jako zářivka
-                    setTimeout(() => {
-                        document.getElementById("story-text").classList.add("blinking");
-
-                        // Po 3s blikání ustane a text se ustálí
-                        setTimeout(() => {
-                            document.getElementById("story-text").classList.remove("blinking");
-                            document.getElementById("story-text").style.opacity = "1";
-                        }, 3000);
-
-                    }, 5000);
+                        content.style.opacity = "0";
+                        setTimeout(startBlinking, 3000);
+                    }, 1000);
                 }
+            }
+
+            function startBlinking() {
+                content.style.opacity = "1";
+                content.classList.add("blinking");
+                setTimeout(() => {
+                    content.classList.remove("blinking");
+                }, 3000);
             }
 
             showWords(0);
